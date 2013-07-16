@@ -55,7 +55,7 @@ def deposit(request):
         #Should be moved to some one time set-up script for efficiency
         #Note that we only want the Submission table but all the metadata
         #tables are created. I can't figure out how to avoid this currently.
-        #db.create_all()
+        db.create_all()
 
         db.session.add(sub)
         db.session.commit()

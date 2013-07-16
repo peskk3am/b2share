@@ -43,6 +43,11 @@ def add_basic_fields(rec, form, email):
 
     record_add_field(rec, '520', subfields=[('a', form['description'])])
 
+    # Set EPIC PID of a record
+    #TODO - replace by a call to get a genuince EPIC PID
+    pid = '12.3456/dummy.pid.78910'
+    record_add_field(rec, '024', ind1='7', subfields = [('2', 'PID'), ('a', pid)])
+
 
 def create_recid():
     """
