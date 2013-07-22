@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import httplib2
-import socks
+#import socks
 from simplejson import loads as jsonloads 
 from simplejson import dumps as jsondumps
 from xml.dom import minidom
@@ -32,7 +32,7 @@ ubuntu: apt-get install python-httplib2 python-simplejson
 
 
 
-def _debugMsg(debug, method,msg):
+def _debugMsg(debug, method, msg):
     """Internal: Print a debug message if debug is enabled."""
     if debug: 
         print "[",method,"]",msg
@@ -62,7 +62,8 @@ def createHandle(location,checksum=None,suffix=''):
     username = str(username)
     
     #http = httplib2.Http(proxy_info = httplib2.ProxyInfo(socks.PROXY_TYPE_HTTP, proxy, proxyPort), disable_ssl_certificate_validation=True)
-    http = httplib2.Http(proxy_info = httplib2.ProxyInfo(socks.PROXY_TYPE_HTTP, proxy, proxyPort))
+#    http = httplib2.Http(proxy_info = httplib2.ProxyInfo(socks.PROXY_TYPE_HTTP, proxy, proxyPort))
+    http = httplib2.Http()
     #r,c = http.request("http://www.bbc.co.uk")
     #print str(r)
     #print str(c)
@@ -70,8 +71,8 @@ def createHandle(location,checksum=None,suffix=''):
 
     _debugMsg(debug, 'createHandleWithLocation',"Location: " + location)
     _debugMsg(debug, 'createHandleWithLocation',"username: " + username)
-    _debugMsg(debug, 'createHandleWithLocation',"password: " + password)   
-    
+    _debugMsg(debug, 'createHandleWithLocation',"password: " + password)
+
     # Our 'prefix' is currently a number not a string - is this right?
     prefix = str(prefix)
     if baseurl.endswith('/'):
@@ -81,24 +82,22 @@ def createHandle(location,checksum=None,suffix=''):
     if suffix != '': uri += "/" + suffix.lstrip(prefix+"/")
     _debugMsg(debug, 'createHandleWithLocation',"URI " + uri)
     #hdrs = {'If-None-Match': '*','Content-Type':'application/json'}
-    hdrs = {'Content-Type':'application/json'}
-    
+    hdrs = {'Content-Type':'application/json', 'Accept': 'application/json'}
+
     if checksum:
         new_handle_json = jsondumps([{'type':'URL','parsed_data':location}, {'type':'CHECKSUM','parsed_data': checksum}])
     else:
         new_handle_json = jsondumps([{'type':'URL','parsed_data':location}])
-        
+
     _debugMsg(debug, 'createHandleWithLocation',"json: " + new_handle_json)         
 
-    
+
     #response, content = http.request(uri, method='GET',headers=hdrs)
     #print str(response)
     #return None
     
     #try:
     response, content = http.request(uri,method='PUT',headers=hdrs,body=new_handle_json)
-    print str(response)
-    print str(content)
     #except:
     #    _debugMsg(debug, 'createHandleWithLocation', "An Exception occurred during Creation of " + uri)
     #    return None
@@ -107,6 +106,7 @@ def createHandle(location,checksum=None,suffix=''):
     
     if response.status != 201:
         _debugMsg(debug, 'createHandleWithLocation', "Not Created: Response status: "+str(response.status))
+        print response
         if response.status == 400:
             _debugMsg('createHandleWithLocation', 'body json:' + new_handle_json)
     return None
@@ -131,6 +131,8 @@ def createHandle(location,checksum=None,suffix=''):
     # TODO - add this later, but first get here successfully
     #updateHandleWithLocation(hdl,location)
     return hdl
+
+createHandle('test_loc')
 
 
 	
@@ -284,3 +286,5 @@ def create(args):
         sys.stdout.write("error")
     else:
         sys.stdout.write(result)
+
+
