@@ -164,27 +164,6 @@ def add_epic_pid(rec, recid, checksum):
             raise e
 
 
-def create_marc(form, sub_id, email):
-    """
-    Generates MARC data used by Invenio from the filled out form, then
-    submits it to the Invenio system.
-    """
-    rec = {}
-    recid = create_recid()
-    record_add_field(rec, '001', controlfield_value=str(recid))
-
-    add_basic_fields(rec, form, email)
-    add_domain_fields(rec, form)
-    add_file_info(rec, form, email, sub_id, recid)
-
-    checksum = create_checksum(rec, sub_id)
-    add_epic_pid(rec, recid, checksum)
-
-    marc = record_xml_output(rec)
-
-    return recid, marc
-    
-    
 def create_checksum(rec, sub_id, buffersize=64*1024):
     """
     Creates a checksum of all the files in the record, and adds it
@@ -204,8 +183,29 @@ def create_checksum(rec, sub_id, buffersize=64*1024):
                 if not block:
                     break
                 sha.update(block)
-    cs = sha.hexdigest()                       
+    cs = sha.hexdigest()
     record_add_field(rec, '024', ind1='7',
                          subfields = [('2', 'checksum'), ('a', cs)])
     return cs
-    
+
+
+def create_marc(form, sub_id, email):
+    """
+    Generates MARC data used by Invenio from the filled out form, then
+    submits it to the Invenio system.
+    """
+    rec = {}
+    recid = create_recid()
+    record_add_field(rec, '001', controlfield_value=str(recid))
+
+    add_basic_fields(rec, form, email)
+    add_domain_fields(rec, form)
+    add_file_info(rec, form, email, sub_id, recid)
+
+    checksum = create_checksum(rec, sub_id)
+    add_epic_pid(rec, recid, checksum)
+
+    marc = record_xml_output(rec)
+
+    return recid, marc
+
