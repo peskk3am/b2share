@@ -1,0 +1,6 @@
+<simplestore>
+  <item name="test">
+      <title>Simplestore test XML doc</title>
+      <description desc="What, you wanted a description!?"></description>
+  </item>    
+</simplestore>
