@@ -1,0 +1,53 @@
+{
+   "records": [ 
+       {
+           "record_content": {
+               "files": [
+                   {   "dir": "data/",
+                       "filename": "simplestore_test_image.jpeg" },
+                   {   "dir": "data/",
+                       "filename": "simplestore_test_odt.odt" }
+               ],
+               "metadata": {
+                   "domain": "Generic",
+                   "title": "Simplestore test record",
+                   "description": "A lolcat image and accompanying document",
+                   "creator": "Huw Morris",
+                   "licence": "GPL",
+                   "publisher": "self published",
+                   "tags": "test data, cats",
+                   "contributors": "Huw; Ilya; Adrian",
+                   "language": "EN",
+                   "resource_type": "E=MC2",
+                   "alternate_identifier": "None",
+                   "version": "-1",
+                   "publication_date": "2013-01-01",
+                   "open_access": false
+               }
+           } 
+       },
+       {
+           "record_content": {
+               "files": [
+                   { "filename": "simplestore_test_text.txt" },
+                   { "filename": "simplestore_test_pdf.pdf" }
+               ],
+               "metadata": {
+                   "domain": "Generic",
+                   "title": "Second Simplestore test record",
+                   "description": "A text document and a PDF",
+                   "creator": "Huw Morris",
+                   "licence": "GPL",
+                   "publisher": "self published",
+                   "tags": "test data, no_cats!",
+                   "contributors": "John; Paul; George; Ringo",
+                   "language": "EN",
+                   "resource_type": "text",
+                   "alternate_identifier": "ISBN-001-002-003",
+                   "version": "3.1415",
+                   "publication_date": "2011-03-04"
+               }
+           } 
+       }
+   ]
+}
