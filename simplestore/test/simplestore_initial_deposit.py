@@ -1,6 +1,7 @@
 import sys
 import json
 import requests
+import argparse
 
 from invenio.testutils import (make_test_suite, run_test_suite, InvenioTestCase,
                                test_web_page_content,
@@ -22,7 +23,7 @@ def read_json(json_file):
     return data
 
             
-def deposit_item(record, verbose, rec_num):
+def deposit_item(record, rec_num, verbose=False):
         if verbose:
             print "Record " + str(rec_num) + ": ...", 
         br = get_authenticated_mechanize_browser(username="admin", password="")
@@ -79,35 +80,24 @@ def deposit_item(record, verbose, rec_num):
             raise DepositException("Unable to deposit record: " + title +
                 '\n' + str(record))
 
-def main(argv=None):
-    if argv is None:
-        argv = sys.argv
-    if len(argv) > 3:
-        print "Usage: " + argv[0] + " [-v] [json file]"
-        return
-           
-    # set defaults
-    json_file = "test_data.json"
-    verbose = False
-
-    if len(argv) > 1:
-        if argv[1] == '-v' or argv[1] == '--verbose':
-            verbose = True
-            del argv[1]
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-v", "--verbose", help="show verbose output",
+                            action="store_true")
+    parser.add_argument("-j", "--json", default="test_data.json",
+                            help="input json file")    
+    args = parser.parse_args()    
         
-        if len(argv) > 1:    
-            json_file = argv[1]
-        
-    test_data = read_json(json_file)
+    test_data = read_json(args.json)
 
     records_list = test_data["records"]
-    if verbose:
-        print "Depositing " + str(len(records_list)) + " records"
+    if args.verbose:
+        print "Depositing %s records" % len(records_list)
     rec_num = 0    
     for r in records_list:
         rec_num = rec_num + 1
         try:
-            deposit_item(r["record_content"], verbose, rec_num)
+            deposit_item(r["record_content"], rec_num, args.verbose)
         except DepositException as e:
             print e.value
 
