@@ -3,10 +3,7 @@ import json
 import requests
 import argparse
 
-from invenio.testutils import (make_test_suite, run_test_suite, InvenioTestCase,
-                               test_web_page_content,
-                               get_authenticated_mechanize_browser)
-from invenio.config import CFG_SITE_SECURE_URL
+#from invenio.config import CFG_SITE_SECURE_URL
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -35,7 +32,9 @@ def read_json(json_file):
 def deposit_item(record, rec_num, verbose=False):
         if verbose:
             print "Record " + str(rec_num) + ": ...", 
-         
+
+   # Change this to the value in your own invenio_local.conf         
+        CFG_SITE_SECURE_URL = 'https://localhost' 
         driver = webdriver.Remote('http://localhost:4444/wd/hub', 
             webdriver.DesiredCapabilities.HTMLUNITWITHJS)   
         driver.get('https://localhost/youraccount/login')
