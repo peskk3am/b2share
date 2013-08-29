@@ -89,10 +89,10 @@ def deposit_item(record, rec_num, verbose=False):
                           verify=False,
                           cookies=login.cookies)
                           
-        domain = driver.find_element_by_id("uploadfiles").click()
-        domain = driver.find_element_by_id("Generic").click()
-        driver.implicitly_wait(5)
-        print driver.page_source
+        #domain = driver.find_element_by_id("uploadfiles").click()
+        #domain = driver.find_element_by_id("Generic").click()
+        #driver.implicitly_wait(5)
+        #print driver.page_source
         #driver.submit()                                
         #Do the submission
         #br.select_form(nr=0)
@@ -104,22 +104,30 @@ def deposit_item(record, rec_num, verbose=False):
         metadata_dict = record["metadata"]
         key_list = metadata_dict.keys()
         title = "Untitled"
+        meta_form = { }
         for key in key_list:
             print key
             #br[key] = metadata_dict[key]
             try:
-                x = driver.find_element_by_id(key)
-                print x.location_once_scrolled_into_view
-                print "Found %s" % key
-                x.send_keys(metadata_dict[key])
+                #x = driver.find_element_by_id(key)
+                #print x.location_once_scrolled_into_view
+                #print "Found %s" % key
+                #x.send_keys(metadata_dict[key])
+                meta_form[key] = metadata_dict[key]
             except NoSuchElementException:
                 print "Not found"
             except ElementNotVisibleException:
                 print "Not visible"    
             if (key == 'title'):
                 title = metadata_dict[key]
-                
-        driver.find_element_by_id("deposit").click()      
+        
+        print meta_form
+        r = requests.post("%s/deposit/addmeta/%s" % (CFG_SITE_SECURE_URL, sub_id),
+        #                  files=files,
+                          data=meta_form,
+                          verify=False,
+                          cookies=login.cookies)        
+        #driver.find_element_by_id("deposit").click()      
         #resp = br.submit()
         #driver.submit()
         #resp_text = resp.read()
