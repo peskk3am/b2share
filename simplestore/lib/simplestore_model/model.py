@@ -114,8 +114,11 @@ class SubmissionMetadata(db.Model):
                            'agreement or code of conduct.'
                            }
         self.field_args['tags'] = {
+            'display_text': "pokusny text",
+            'default': "default text",
+
             'description':
-            'This is an element where people can add a comma separated list ' +\
+            '!!!This is an element where people can add a comma separated list ' +\
             'of tags (keywords) that ' +\
             'may characterize the content. In a later phase users should be ' +\
             'able to also add tags. Multiple values are allowed in this tag.'}
