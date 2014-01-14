@@ -25,7 +25,7 @@
 
 {% for s in metadata.fieldsets %}
     {% for f in s.basic_fields %}
-      <p>{{ f }}</p>
+      <p>{{ getattr(form, f) }}</p>
     {% endfor %}
 
   <fieldset>
