@@ -24,6 +24,10 @@
 {% endmacro %}
 
 {% for s in metadata.fieldsets %}
+    {% for f in s.basic_fields %}
+      <p>{{ f }}</p>
+    {% endfor %}
+
   <fieldset>
     <legend>{{ s.name }}</legend>
 

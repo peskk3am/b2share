@@ -114,7 +114,7 @@ class SubmissionMetadata(db.Model):
                            'agreement or code of conduct.'
                            }
         self.field_args['tags'] = {
-            'placeholder': 'pokus',
+            # 'placeholder': 'pokus',
             'description':
             '!!!This is an element where people can add a comma separated list ' +\
             'of tags (keywords) that ' +\
@@ -220,7 +220,7 @@ def _create_metadata_class(cfg):
             args['field_args'][f['name']]['data_source'] = f.get('data_source')
         if 'default' in f:
             args['field_args'][f['name']]['default'] = f.get('default')
-        if 'placeholder' in f:
-            args['field_args'][f['name']]['placeholder'] = f.get('placeholder')
+        # if 'placeholder' in f:
+        #   args['field_args'][f['name']]['placeholder'] = f.get('placeholder')
 
     return type(clsname, (SubmissionMetadata,), args)
