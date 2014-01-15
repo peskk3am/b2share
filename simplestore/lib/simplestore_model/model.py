@@ -53,8 +53,7 @@ class SubmissionMetadata(db.Model):
     # optional
     contributors = db.Column(db.String(256))  # split on ;
     language = db.Column(db.Enum(*babel.core.LOCALE_ALIASES.keys()))
-    #resource_type = db.Column(db.String(256))  # XXX should be extracted to a separate class
-    resource_type = db.Column(db.Enum("text", "image", "video", "audio", "other"))
+    resource_type = db.Column(db.String(256))  # XXX should be extracted to a separate class
     alternate_identifier = db.Column(db.String(256))
     version = db.Column(db.String(128))
 
@@ -116,6 +115,7 @@ class SubmissionMetadata(db.Model):
                            'leave this field blank.'
                            }
         self.field_args['tags'] = {
+            'placeholder': "keyword1, keyword2",
             'description':
             'A comma separated list of tags (keywords) that ' +\
             'characterize the content.'}
@@ -215,5 +215,7 @@ def _create_metadata_class(cfg):
             args['field_args'][f['name']]['data_source'] = f.get('data_source')
         if 'default' in f:
             args['field_args'][f['name']]['default'] = f.get('default')
+        if 'placeholder' in f:
+            args['field_args'][f['name']]['placeholder'] = f.get('placeholder')
 
     return type(clsname, (SubmissionMetadata,), args)

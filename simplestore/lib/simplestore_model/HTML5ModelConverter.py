@@ -150,6 +150,30 @@ class TypeAheadStringField(StringField):
         super(TypeAheadStringField, self).__init__(**kwargs)
 
 
+class PlaceholderStringField(StringField):
+
+    widget = PlaceholderStringInput()
+    placeholder = ""
+
+    def __init__(self, placeholder="", **kwargs):
+        self.placeholder = placeholder
+        super(TypeAheadStringField, self).__init__(**kwargs)
+
+
+class PlaceholderStringInput(Input):
+    input_type = "text"
+
+    def __call__(self, field, placeholder="", **kwargs):
+        kwargs.setdefault('id', field.id)
+        kwargs.setdefault('type', self.input_type)
+        if 'value' not in kwargs:
+            kwargs['value'] = field._value()
+
+        return HTMLString(
+            '<input autocomplete="off" placeholder="{0}" {2}>'.format(
+            field.placeholder, self.html_params(name=field.name, **kwargs)))
+
+
 class HTML5ModelConverter(ModelConverter):
     def __init__(self, extra_converters=None):
         super(HTML5ModelConverter, self).__init__(extra_converters)
@@ -182,6 +206,9 @@ class HTML5ModelConverter(ModelConverter):
 
     @converts('String')
     def conv_String(self, field_args, **extra):
+        if 'placeholder' in field_args:
+            return PlaceholderStringInput(**field_args)
+
         if 'data_provide' in field_args:
             return TypeAheadStringField(**field_args)
         else:
