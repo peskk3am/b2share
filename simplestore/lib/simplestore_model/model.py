@@ -79,6 +79,7 @@ class SubmissionMetadata(db.Model):
                                     basic_fields=self.basic_fields,
                                     optional_fields=self.optional_fields))]
         self.field_args['title'] = {
+            'placeholder': "Title of the resource",
             'description':
             'The title of the uploaded resource - a name that ' +\
             'indicates the content to be expected.'}
@@ -103,6 +104,7 @@ class SubmissionMetadata(db.Model):
             'automatically.'
         }
         self.field_args['version'] = {
+            'placeholder': 'e.g. v1.02',
             'description':
             'Denote the version of the resource.'
         }
@@ -115,7 +117,7 @@ class SubmissionMetadata(db.Model):
                            'leave this field blank.'
                            }
         self.field_args['tags'] = {
-            'placeholder': "keyword1, keyword2",
+            'placeholder': "keyword1, keyword2, ...",
             'description':
             'A comma separated list of tags (keywords) that ' +\
             'characterize the content.'}
@@ -125,6 +127,7 @@ class SubmissionMetadata(db.Model):
             'is restricted. In case of restricted access the uploaded files ' +\
             'will not be public, however the metadata will be.'}
         self.field_args['contributors'] = {
+            'placeholder': 'Co-author 1; Co-author 2; ...',
             'description':
             'A semicolon separated list of ' +\
             'contributors, e.g. further authors. Mention all ' +\
@@ -133,12 +136,15 @@ class SubmissionMetadata(db.Model):
             'description': 
             'The name of the language the document is written in.'}
         self.field_args['resource_type'] = {
+            'placeholder': 'Resource type, such as "text", "image", "video", ...',
             'description': 
             'Select the type of the resource.'}
         self.field_args['alternate_identifier'] = {
+            'placeholder': 'Other reference, such as URI, ISBN, etc.',
             'description': 
             'Any kind of other reference such as a URN, URI or an ISBN number.'}
         self.field_args['creator'] = {
+            'placeholder': 'The main author of the resource.',
             'description': 'The person who created the resource'}
 
 def _create_metadata_class(cfg):
