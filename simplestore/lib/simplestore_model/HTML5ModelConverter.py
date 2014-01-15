@@ -207,7 +207,7 @@ class HTML5ModelConverter(ModelConverter):
     @converts('String')
     def conv_String(self, field_args, **extra):
         if 'placeholder' in field_args:
-            return PlaceholderStringInput(**field_args)
+            return PlaceholderStringField(**field_args)
 
         if 'data_provide' in field_args:
             return TypeAheadStringField(**field_args)
