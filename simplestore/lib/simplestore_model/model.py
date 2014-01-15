@@ -45,7 +45,7 @@ class SubmissionMetadata(db.Model):
     open_access = db.Column(db.Boolean(), default=True)
 
     licence = db.Column(db.String(128))  # note we set licences in __init__
-    publisher = db.Column(db.String(128))
+    publisher = db.Column(db.String(128), default="csc.fi") # TODO set this in a config
     publication_date = db.Column('publication_year', db.Date(),
                                  default=date.today())
     tags = db.Column(db.String(256))  # split on ,
@@ -57,10 +57,10 @@ class SubmissionMetadata(db.Model):
     alternate_identifier = db.Column(db.String(256))
     version = db.Column(db.String(128))
 
+    # basic_fields = ['title', 'description', 'creator', 'open_access',
+    #                'licence', 'publisher', 'publication_date', 'tags']
     basic_fields = ['title', 'description', 'creator', 'open_access',
-                    'licence', 'publisher', 'publication_date', 'tags']
-    #basic_fields = ['title', 'description', 'author', 'open_access',
-    #                'licence', 'tags']
+                    'licence', 'tags']
     optional_fields = ['contributors', 'language', 'resource_type',
                        'alternate_identifier', 'version']
 
@@ -137,7 +137,7 @@ class SubmissionMetadata(db.Model):
         self.field_args['alternate_identifier'] = {
             'description': 
             'Any kind of other reference such as a URN, URI or an ISBN number.'}
-        self.field_args['author'] = {
+        self.field_args['creator'] = {
             'description': 'The person who created the resource'}
 
 def _create_metadata_class(cfg):
