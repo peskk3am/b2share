@@ -24,9 +24,6 @@
 {% endmacro %}
 
 {% for s in metadata.fieldsets %}
-    {% for f in s.basic_fields %}
-      <p>{{ getattr(form, f) }}</p>
-    {% endfor %}
 
   <fieldset>
     <legend>{{ s.name }}</legend>
