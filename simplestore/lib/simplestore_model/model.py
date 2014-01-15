@@ -144,6 +144,7 @@ class SubmissionMetadata(db.Model):
             'description': 
             'Any kind of other reference such as a URN, URI or an ISBN number.'}
         self.field_args['creator'] = {
+            'name': 'Author',
             'placeholder': 'The main author of the resource.',
             'description': 'The person who created the resource'}
 
