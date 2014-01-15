@@ -57,10 +57,10 @@ class SubmissionMetadata(db.Model):
     alternate_identifier = db.Column(db.String(256))
     version = db.Column(db.String(128))
 
-    #basic_fields = ['title', 'description', 'creator', 'open_access',
-    #                'licence', 'publisher', 'publication_date', 'tags']
-    basic_fields = ['title', 'description', 'author', 'open_access',
-                    'licence', 'tags']
+    basic_fields = ['title', 'description', 'creator', 'open_access',
+                    'licence', 'publisher', 'publication_date', 'tags']
+    #basic_fields = ['title', 'description', 'author', 'open_access',
+    #                'licence', 'tags']
     optional_fields = ['contributors', 'language', 'resource_type',
                        'alternate_identifier', 'version']
 
