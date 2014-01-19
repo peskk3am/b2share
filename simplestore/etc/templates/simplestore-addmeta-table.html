@@ -28,7 +28,9 @@
       {{ f }}
     {% endfor %}
 
-
+    {% for f in s.optional_fields %}
+      {{ f }}
+    {% endfor %}
 
   <fieldset>
     <legend>{{ s.name }}</legend>
