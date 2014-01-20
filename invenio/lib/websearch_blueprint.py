@@ -56,7 +56,7 @@ blueprint = InvenioBlueprint('search', __name__, url_prefix="",
                              breadcrumbs=[],
                              menubuilder=[('main.search', _('Search'),
                                            'search.index', 1)])
-
+g.ln = "en"
 
 def insert(name):
     def _bfe_element(bfo, **kwargs):
