@@ -23,7 +23,6 @@ from invenio.webinterface_handler_flask_utils import _, InvenioBlueprint
 import invenio.simplestore_upload_handler as uph
 import invenio.simplestore_deposit_handler as dep
 
-language = "?ln=en"
 
 blueprint = InvenioBlueprint('simplestore', __name__,
                              url_prefix='/deposit',
@@ -33,32 +32,32 @@ blueprint = InvenioBlueprint('simplestore', __name__,
                              breadcrumbs=[(_('Deposit'),
                                           'simplestore.deposit')])
 
-
+language = "?ln=en"
 @blueprint.route('/'+language, methods=['GET'])
 @blueprint.invenio_authenticated
 def deposit():
     return dep.deposit(request)
 
 
-@blueprint.route('/addmeta/<sub_id>'+language, methods=['POST'])
+@blueprint.route('/addmeta/<sub_id>', methods=['POST'])
 @blueprint.invenio_authenticated
 def addmeta(sub_id):
     return dep.addmeta(request, sub_id)
 
 
-@blueprint.route('/upload/<sub_id>'+language, methods=['POST'])
+@blueprint.route('/upload/<sub_id>', methods=['POST'])
 @blueprint.invenio_authenticated
 def upload(sub_id):
     return uph.upload(request, sub_id)
 
 
-@blueprint.route('/delete/<sub_id>'+language, methods=['POST'])
+@blueprint.route('/delete/<sub_id>', methods=['POST'])
 @blueprint.invenio_authenticated
 def delete(sub_id):
     return uph.delete(request, sub_id)
 
 
-@blueprint.route('/get_file/<sub_id>'+language, methods=['GET'])
+@blueprint.route('/get_file/<sub_id>', methods=['GET'])
 @blueprint.invenio_authenticated
 def get_file(sub_id):
     # XXX uses insecure function
@@ -67,19 +66,19 @@ def get_file(sub_id):
     return uph.get_file(request, sub_id)
 
 
-@blueprint.route('/getform/<sub_id>/<domain>'+language, methods=['GET'])
+@blueprint.route('/getform/<sub_id>/<domain>', methods=['GET'])
 @blueprint.invenio_authenticated
 def getform(sub_id, domain):
     return dep.getform(request, sub_id, domain)
 
 
-@blueprint.route('/check_status/<sub_id>/'+language, methods=['GET', 'POST'])
+@blueprint.route('/check_status/<sub_id>/', methods=['GET', 'POST'])
 @blueprint.invenio_authenticated
 def check_status(sub_id):
     return uph.check_status(sub_id)
 
 
-@blueprint.route('/check_status/'+language, methods=['GET', 'POST'])
+@blueprint.route('/check_status/', methods=['GET', 'POST'])
 @blueprint.invenio_authenticated
 def check_status_noarg():
     return uph.check_status_noarg()
