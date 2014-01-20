@@ -23,7 +23,6 @@ from invenio.webinterface_handler_flask_utils import _, InvenioBlueprint
 import invenio.simplestore_upload_handler as uph
 import invenio.simplestore_deposit_handler as dep
 
-
 blueprint = InvenioBlueprint('simplestore', __name__,
                              url_prefix='/deposit',
                              menubuilder=[('main.simplestore',
@@ -32,8 +31,8 @@ blueprint = InvenioBlueprint('simplestore', __name__,
                              breadcrumbs=[(_('Deposit'),
                                           'simplestore.deposit')])
 
-language = "?ln=en"
-@blueprint.route('/'+language, methods=['GET'])
+
+@blueprint.route('/', methods=['GET'])
 @blueprint.invenio_authenticated
 def deposit():
     return dep.deposit(request)
