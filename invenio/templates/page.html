@@ -54,15 +54,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="Content-Language" content="{{ g.ln|safe }}" />
+    <!--    <meta http-equiv="Content-Language" content="{{ g.ln|safe }}" /> -->
+    <meta http-equiv="Content-Language" content="en" />
     <meta name="description" content="{{ description }}" />
     <meta name="keywords" content="{{ keywords }}" />
     <meta name="author" content="">
     <link rev="made" href="mailto:{{ config.CFG_SITE_SUPPORT_EMAIL }}" />
     <link rel="canonical" href="{{ canonical_url }}" />
+    <!--
     {% for alt_ln, alternate_url in alternate_urls.iteritems() %}
     <link rel="alternate" hreflang="{{ alt_ln }}" href="{{ alternate_url }}" />
     {% endfor %}
+    -->
     <link rel="alternate" type="application/rss+xml" title="{{ config.CFG_SITE_NAME }} RSS" href="{{ url_for('rss') }}" />
     <link rel="search" type="application/opensearchdescription+xml" href="{{ url_for('opensearchdescription') }}" title="{{ config.CFG_SITE_NAME }}" />
     <link rel="unapi-server" type="application/xml" title="unAPI" href="{{ url_for('unapi') }}" />
