@@ -134,7 +134,8 @@ def get_export_formats():
 def index():
     """ Renders homepage. """
     collection = Collection.query.get_or_404(1)
-    print g.ln;
+    print "Aaa"+g.ln;
+    print "<p>Aaa"+g.ln+"</p>";
     from invenio.b2share_utils import get_latest_deposits
     latest_deposits = get_latest_deposits()
     # inject functions to the template
