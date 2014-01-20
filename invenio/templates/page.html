@@ -96,7 +96,8 @@
 </head>
 
 <!-- page.html: start body -->
-<body class="{{ body_css_classes|join(' ') if body_css_classes }}" lang="en <!-- {{ g.ln.split('_', 1)[0]|safe }} -->" {{ rtl_direction|safe }}>
+<!-- lang="{{ g.ln.split('_', 1)[0]|safe }}" -->
+<body class="{{ body_css_classes|join(' ') if body_css_classes }}" lang="en" {{ rtl_direction|safe }}>
     <div id="wrap">
         <header>
             <!-- page.html: start block headerbox; replaced page header -->
