@@ -57,6 +57,7 @@ blueprint = InvenioBlueprint('search', __name__, url_prefix="",
                              menubuilder=[('main.search', _('Search'),
                                            'search.index', 1)])
 
+
 def insert(name):
     def _bfe_element(bfo, **kwargs):
         # convert to utf-8 for legacy app
@@ -128,7 +129,7 @@ def get_export_formats():
     ).order_by(Format.name).all()
 
 
-@blueprint.route('/'+"?ln=en", methods=['GET', 'POST'])
+@blueprint.route('/', methods=['GET', 'POST'])
 @blueprint.invenio_templated('websearch_index.html')
 def index():
     """ Renders homepage. """
