@@ -47,14 +47,15 @@
 
 {%- if not no_pageheader -%}
 <!DOCTYPE html>
-<html lang="{{ ln|safe }}" {% if is_language_rtl(g.ln) %}dir="rtl"{% endif %}>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>EUDAT B2SHARE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="Content-Language" content="{{ g.ln|safe }}" />
+    <!-- <meta http-equiv="Content-Language" content="{{ g.ln|safe }}" /> -->
+    <meta http-equiv="Content-Language" content="en" />
     <meta name="description" content="{{ description }}" />
     <meta name="keywords" content="{{ keywords }}" />
     <meta name="author" content="">
@@ -96,7 +97,7 @@
 </head>
 
 <!-- page.html: start body -->
-<body class="{{ body_css_classes|join(' ') if body_css_classes }}" lang="{{ g.ln.split('_', 1)[0]|safe }}" {{ rtl_direction|safe }}>
+<body class="{{ body_css_classes|join(' ') if body_css_classes }}" lang="en" {{ rtl_direction|safe }}>
     <div id="wrap">
         <header>
             <!-- page.html: start block headerbox; replaced page header -->
