@@ -133,6 +133,7 @@ def get_export_formats():
 @blueprint.invenio_templated('websearch_index.html')
 def index():
     """ Renders homepage. """
+    global g.ln = "en"
     collection = Collection.query.get_or_404(1)
 
     from invenio.b2share_utils import get_latest_deposits
