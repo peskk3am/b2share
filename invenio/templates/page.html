@@ -47,7 +47,7 @@
 
 {%- if not no_pageheader -%}
 <!DOCTYPE html>
-<html lang="{{ ln|safe }}"  >
+<html lang="{{ ln|safe }}" {% if is_language_rtl(g.ln) %}dir="rtl"{% endif %}>
 <head>
     <meta charset="utf-8">
     <title>EUDAT B2SHARE</title>
@@ -96,7 +96,7 @@
 </head>
 
 <!-- page.html: start body -->
-<body class="{{ body_css_classes|join(' ') if body_css_classes }}" lang="{{ g.ln.split('_', 1)[0]|safe }}" {{ rtl_direction|safe }}>
+<body class="{{ body_css_classes|join(' ') if body_css_classes }}" lang="en <!-- {{ g.ln.split('_', 1)[0]|safe }} -->" {{ rtl_direction|safe }}>
     <div id="wrap">
         <header>
             <!-- page.html: start block headerbox; replaced page header -->
