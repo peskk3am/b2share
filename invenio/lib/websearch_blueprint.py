@@ -112,11 +112,6 @@ def add_bfe_functions():
     return bfe_from_tags
 
 
-@blueprint.app_context_processor
-def set_ln():
-    setattr(g, 'ln', "en")
-
-
 def cached_format_record(recIDs, of, ln='', verbose=0,
                          search_pattern=None, xml_records=None, user_info=None,
                          record_prefix=None, record_separator=None,
