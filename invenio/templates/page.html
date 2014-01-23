@@ -47,22 +47,21 @@
 
 {%- if not no_pageheader -%}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ ln|safe }}" {% if is_language_rtl(g.ln) %}dir="rtl"{% endif %}>
 <head>
     <meta charset="utf-8">
     <title>EUDAT B2SHARE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!-- <meta http-equiv="Content-Language" content="{{ g.ln|safe }}" /> -->
-    <meta http-equiv="Content-Language" content="en" />
+    <meta http-equiv="Content-Language" content="{{ g.ln|safe }}" />
     <meta name="description" content="{{ description }}" />
     <meta name="keywords" content="{{ keywords }}" />
     <meta name="author" content="">
     <link rev="made" href="mailto:{{ config.CFG_SITE_SUPPORT_EMAIL }}" />
     <link rel="canonical" href="{{ canonical_url }}" />
     {% for alt_ln, alternate_url in alternate_urls.iteritems() %}
-    <link rel="alternate" hreflang="{{ alt_ln }}" href="ln=en" />
+    <link rel="alternate" hreflang="{{ alt_ln }}" href="{{ alternate_url }}" />
     {% endfor %}
     <link rel="alternate" type="application/rss+xml" title="{{ config.CFG_SITE_NAME }} RSS" href="{{ url_for('rss') }}" />
     <link rel="search" type="application/opensearchdescription+xml" href="{{ url_for('opensearchdescription') }}" title="{{ config.CFG_SITE_NAME }}" />
@@ -97,7 +96,7 @@
 </head>
 
 <!-- page.html: start body -->
-<body class="{{ body_css_classes|join(' ') if body_css_classes }}" lang="en" {{ rtl_direction|safe }}>
+<body class="{{ body_css_classes|join(' ') if body_css_classes }}" lang="{{ g.ln.split('_', 1)[0]|safe }}" {{ rtl_direction|safe }}>
     <div id="wrap">
         <header>
             <!-- page.html: start block headerbox; replaced page header -->
