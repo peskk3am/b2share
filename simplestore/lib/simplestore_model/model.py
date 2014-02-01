@@ -18,7 +18,7 @@
 from invenio.sqlalchemyutils import db
 from datetime import date
 import babel
-
+from invenio.config import CFG_SITE_URL
 
 class FieldSet:
 
@@ -40,12 +40,12 @@ class SubmissionMetadata(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Text(), nullable=False)
-    author = db.Column(db.String(128))
+    creator = db.Column(db.String(128))
     title = db.Column(db.String(256), nullable=False)
     open_access = db.Column(db.Boolean(), default=True)
 
     licence = db.Column(db.String(128))  # note we set licences in __init__
-    publisher = db.Column(db.String(128), default="csc.fi") # TODO set this in a config
+    publisher = db.Column(db.String(128), default=CFG_SITE_URL)
     publication_date = db.Column('publication_year', db.Date(),
                                  default=date.today())
     tags = db.Column(db.String(256))  # split on ,
@@ -143,9 +143,11 @@ class SubmissionMetadata(db.Model):
             'placeholder': 'Other reference, such as URI, ISBN, etc.',
             'description': 
             'Any kind of other reference such as a URN, URI or an ISBN number.'}
-        self.field_args['author'] = {
+        self.field_args['creator'] = {
+            'display_text': 'Author',
+            'label': 'Author_',
             'placeholder': 'The main author of the resource.',
-            'description': 'The person who created the resource'}
+            'description': 'The person who created the resource.'}
 
 def _create_metadata_class(cfg):
     """Creates domain classes that map form fields to databases plus some other
