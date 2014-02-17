@@ -33,7 +33,6 @@ pck = metadata
 prefix = pck.__name__ + '.'
 for imp, modname, ispkg in pkgutil.iter_modules(pck.__path__, prefix):
     # not sure what fromlist does...
-    print "pokus"
     mod = __import__(modname, fromlist="dummy")
     if hasattr(mod, 'domain'):
         domain_name = mod.domain.lower()

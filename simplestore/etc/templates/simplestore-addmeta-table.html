@@ -33,15 +33,6 @@
 {% for s in metadata.fieldsets %}
   <fieldset>
     <legend>{{ s.name }}</legend>
-    s: {{s}} <br>
-    {% for f in s.basic_fields %}
-      {{ f }}
-    {% endfor %}
-    aaaaa <br>
-    {% for f in s.basic_fields %}
-      {{ getattr(form, f) }}
-    {% endfor %}
-    bbbb
 
 <table>
     {% for f in s.basic_fields %}
