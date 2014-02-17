@@ -33,7 +33,7 @@ pck = metadata
 prefix = pck.__name__ + '.'
 for imp, modname, ispkg in pkgutil.iter_modules(pck.__path__, prefix):
     soubor = open("pokus.txt", "w")
-    soubor.printline(imp + " " + modname + " " + ispkg)
+    soubor.write(imp + " " + modname + " " + ispkg + "\n")
     soubor.close()
     # not sure what fromlist does...
     mod = __import__(modname, fromlist="dummy")
