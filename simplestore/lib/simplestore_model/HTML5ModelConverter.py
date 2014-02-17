@@ -160,7 +160,7 @@ class PlaceholderStringInput(Input):
             kwargs['value'] = field._value()
 
         return HTMLString(
-            '<input type="text" placeholder="{0}" {1}>'.format(
+            '<input placeholder="{0}" {1}>'.format(
             field.placeholder, self.html_params(name=field.name, **kwargs)))
 
 
