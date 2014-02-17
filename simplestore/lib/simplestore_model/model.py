@@ -18,7 +18,7 @@
 from invenio.sqlalchemyutils import db
 from datetime import date
 import babel
-
+from invenio.config import CFG_SITE_URL
 
 class FieldSet:
 
@@ -45,7 +45,7 @@ class SubmissionMetadata(db.Model):
     open_access = db.Column(db.Boolean(), default=True)
 
     licence = db.Column(db.String(128))  # note we set licences in __init__
-    publisher = db.Column(db.String(128))
+    publisher = db.Column(db.String(128), default=CFG_SITE_URL)
     publication_date = db.Column('publication_year', db.Date(),
                                  default=date.today())
     tags = db.Column(db.String(256))  # split on ,
