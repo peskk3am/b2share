@@ -18,7 +18,7 @@
 from invenio.sqlalchemyutils import db
 from datetime import date
 import babel
-from invenio.config import CFG_SITE_URL
+# from invenio.config import CFG_SITE_URL
 
 class FieldSet:
 
@@ -212,8 +212,8 @@ def _create_metadata_class(cfg):
         args[f['name']] = db.Column(f['col_type'], nullable=nullable)
         # Doesn't seem pythonic, but show me a better way
         args['field_args'][f['name']] = {}
-        if 'display_text' in f:
-            args['field_args'][f['name']]['label'] = f.get('display_text')
+        # if 'display_text' in f:
+        #    args['field_args'][f['name']]['label'] = f.get('display_text')
         if 'description' in f:
             args['field_args'][f['name']]['description'] = f.get('description')
         if 'data_provide' in f:
