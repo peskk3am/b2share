@@ -18,7 +18,7 @@
 from invenio.sqlalchemyutils import db
 from datetime import date
 import babel
-# from invenio.config import CFG_SITE_URL
+
 
 class FieldSet:
 
@@ -45,23 +45,21 @@ class SubmissionMetadata(db.Model):
     open_access = db.Column(db.Boolean(), default=True)
 
     licence = db.Column(db.String(128))  # note we set licences in __init__
-    publisher = db.Column(db.String(128)) # default=CFG_SITE_URL
+    publisher = db.Column(db.String(128))
     publication_date = db.Column('publication_year', db.Date(),
                                  default=date.today())
     tags = db.Column(db.String(256))  # split on ,
 
     # optional
     contributors = db.Column(db.String(256))  # split on ;
-    language = db.Column(db.Enum(*babel.core.LOCALE_ALIASES.keys()))
+    #language = db.Column(db.Enum(*babel.core.LOCALE_ALIASES.keys()))
     resource_type = db.Column(db.String(256))  # XXX should be extracted to a separate class
     alternate_identifier = db.Column(db.String(256))
     version = db.Column(db.String(128))
 
-    # basic_fields = ['title', 'description', 'creator', 'open_access',
-    #                'licence', 'publisher', 'publication_date', 'tags']
     basic_fields = ['title', 'description', 'creator', 'open_access',
-                    'licence', 'tags']
-    optional_fields = ['contributors', 'language', 'resource_type',
+                    'licence', 'publisher', 'publication_date', 'tags']
+    optional_fields = ['contributors', 'resource_type',
                        'alternate_identifier', 'version']
 
     # using joined table inheritance for the specific domains
@@ -79,16 +77,15 @@ class SubmissionMetadata(db.Model):
                                     basic_fields=self.basic_fields,
                                     optional_fields=self.optional_fields))]
         self.field_args['title'] = {
-        #    'placeholder': "Title of the resource",
             'description':
-            'The title of the uploaded resource - a name that ' +\
+            'This is the title of the uploaded resource - a name that ' +\
             'indicates the content to be expected.'}
         self.field_args['description'] = {
             'description':
-            'A more elaborate description of the resource. ' +\
-            'Focus on a description of ' +\
+            'This is a more elaborate description of the resource without ' +\
+            'semantic restrictions. It should focus on a description of ' +\
             'content making it easy for others to find it and to ' +\
-            'interpret its relevance quickly.'
+            'interpret its relevence quickly.'
         }
         self.field_args['publisher'] = {
             'description':
@@ -104,49 +101,50 @@ class SubmissionMetadata(db.Model):
             'automatically.'
         }
         self.field_args['version'] = {
-        #    'placeholder': 'e.g. v1.02',
             'description':
-            'Denote the version of the resource.'
-        }
+            'This element can be added by the depositor to denote whether ' +\
+            'there are new versions etc.'
+        }              
         self.field_args['licence'] = {
             'data_provide': 'typeahead',
             'data_source': '["GPL","Apache v2","Commercial", "Other"]',
-            'description': 'Specify whether users need to sign a licence ' +\
-                           'agreement to access the data (e.g. GPL, ' +\
-                           'Apache v2 or Commercial); if no licence applies ' +\
-                           'leave this field blank.'
+            'description': 'It might be the case that people need to sign ' +\
+                           'a licence agreement to access the data. This ' +\
+                           'element offers a pointer to the licence ' +\
+                           'agreement or code of conduct.'
                            }
         self.field_args['tags'] = {
-        #    'placeholder': "keyword1, keyword2, ...",
             'description':
-            'A comma separated list of tags (keywords) that ' +\
-            'characterize the content.'}
+            'This is an element where people can add a comma separated list ' +\
+            'of tags (keywords) that ' +\
+            'may characterize the content. In a later phase users should be ' +\
+            'able to also add tags. Multiple values are allowed in this tag.'}
         self.field_args['open_access'] = {
             'description':
-            'Indicate whether the resource is open or access ' +\
+            'This element indicates whether the resource is open or access ' +\
             'is restricted. In case of restricted access the uploaded files ' +\
-            'will not be public, however the metadata will be.'}
+            'will not be public, however the metadata will be'}
         self.field_args['contributors'] = {
-        #    'placeholder': 'Co-author 1; Co-author 2; ...',
             'description':
-            'A semicolon separated list of ' +\
-            'contributors, e.g. further authors. Mention all ' +\
+            'This element contains a semicolon separated list of ' +\
+            'contributors, e.g. further authors. Here people can mention all ' +\
             'other persons that were relevant in the creation of the resource.'}
-        self.field_args['language'] = {
-            'description': 
-            'The name of the language the document is written in.'}
+#        self.field_args['language'] = {
+#            'description': 
+#           'This element specifies the name of the language the document ' +\
+#            'is written in.',
+#	    }
         self.field_args['resource_type'] = {
-        #    'placeholder': 'Resource type, such as "text", "image", "video", ...',
             'description': 
-            'Select the type of the resource.'}
+            'This element allows the depositor to specify the type of the ' +\
+            'resource, e.g. written report, audio or video.'}
         self.field_args['alternate_identifier'] = {
-        #    'placeholder': 'Other reference, such as URI, ISBN, etc.',
             'description': 
-            'Any kind of other reference such as a URN, URI or an ISBN number.'}
-        self.field_args['creator'] = {
-            # 'label': 'Author',
-        #    'placeholder': 'The main author of the resource.',
-            'description': 'The person who created the resource.'}
+            'This element allows the depositor to add any kind of other ' +\
+            'reference such as a URN, URI or an ISBN number.'}
+        self.field_args['creator'] = {           
+            'description': 'Either the person who created the resource or ' +\
+                           'the person who uploaded the resource.'}
 
 def _create_metadata_class(cfg):
     """Creates domain classes that map form fields to databases plus some other
@@ -212,8 +210,8 @@ def _create_metadata_class(cfg):
         args[f['name']] = db.Column(f['col_type'], nullable=nullable)
         # Doesn't seem pythonic, but show me a better way
         args['field_args'][f['name']] = {}
-        # if 'display_text' in f:
-        #    args['field_args'][f['name']]['label'] = f.get('display_text')
+        if 'display_text' in f:
+            args['field_args'][f['name']]['label'] = f.get('display_text')
         if 'description' in f:
             args['field_args'][f['name']]['description'] = f.get('description')
         if 'data_provide' in f:
@@ -222,7 +220,5 @@ def _create_metadata_class(cfg):
             args['field_args'][f['name']]['data_source'] = f.get('data_source')
         if 'default' in f:
             args['field_args'][f['name']]['default'] = f.get('default')
-    #    if 'placeholder' in f:
-    #        args['field_args'][f['name']]['placeholder'] = f.get('placeholder')
 
     return type(clsname, (SubmissionMetadata,), args)
