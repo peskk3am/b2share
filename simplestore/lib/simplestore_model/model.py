@@ -57,10 +57,10 @@ class SubmissionMetadata(db.Model):
     alternate_identifier = db.Column(db.String(256))
     version = db.Column(db.String(128))
 
-    # basic_fields = ['title', 'description', 'creator', 'open_access',
-    #                'licence', 'publisher', 'publication_date', 'tags']
     basic_fields = ['title', 'description', 'creator', 'open_access',
-                    'licence', 'tags']
+                    'licence', 'publisher', 'publication_date', 'tags']
+    # basic_fields = ['title', 'description', 'creator', 'open_access',
+    #                'licence', 'tags']
     optional_fields = ['contributors', 'language', 'resource_type',
                        'alternate_identifier', 'version']
 
@@ -144,8 +144,6 @@ class SubmissionMetadata(db.Model):
             'description': 
             'Any kind of other reference such as a URN, URI or an ISBN number.'}
         self.field_args['creator'] = {
-            'display_text': 'Author',
-            'label': 'Author_',
             'placeholder': 'The main author of the resource.',
             'description': 'The person who created the resource.'}
 
