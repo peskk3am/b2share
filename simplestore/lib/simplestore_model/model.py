@@ -45,7 +45,7 @@ class SubmissionMetadata(db.Model):
     open_access = db.Column(db.Boolean(), default=True)
 
     licence = db.Column(db.String(128))  # note we set licences in __init__
-    publisher = db.Column(db.String(128), default="") # CFG_SITE_URL)
+    publisher = db.Column(db.String(128)) # default=CFG_SITE_URL
     publication_date = db.Column('publication_year', db.Date(),
                                  default=date.today())
     tags = db.Column(db.String(256))  # split on ,
@@ -57,10 +57,10 @@ class SubmissionMetadata(db.Model):
     alternate_identifier = db.Column(db.String(256))
     version = db.Column(db.String(128))
 
-    basic_fields = ['title', 'description', 'creator', 'open_access',
-                    'licence', 'publisher', 'publication_date', 'tags']
     # basic_fields = ['title', 'description', 'creator', 'open_access',
-    #                'licence', 'tags']
+    #                'licence', 'publisher', 'publication_date', 'tags']
+    basic_fields = ['title', 'description', 'creator', 'open_access',
+                    'licence', 'tags']
     optional_fields = ['contributors', 'language', 'resource_type',
                        'alternate_identifier', 'version']
 
@@ -144,6 +144,7 @@ class SubmissionMetadata(db.Model):
             'description': 
             'Any kind of other reference such as a URN, URI or an ISBN number.'}
         self.field_args['creator'] = {
+            # 'label': 'Author',
             'placeholder': 'The main author of the resource.',
             'description': 'The person who created the resource.'}
 
@@ -211,8 +212,8 @@ def _create_metadata_class(cfg):
         args[f['name']] = db.Column(f['col_type'], nullable=nullable)
         # Doesn't seem pythonic, but show me a better way
         args['field_args'][f['name']] = {}
-        #if 'display_text' in f:
-        #    args['field_args'][f['name']]['label'] = f.get('display_text')
+        if 'display_text' in f:
+            args['field_args'][f['name']]['label'] = f.get('display_text')
         if 'description' in f:
             args['field_args'][f['name']]['description'] = f.get('description')
         if 'data_provide' in f:
