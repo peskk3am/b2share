@@ -134,6 +134,8 @@ class SubmissionMetadata(db.Model):
             'description':
             'The name of the language the document is written in.'}
         self.field_args['resource_type'] = {
+            'type': 'select',
+            'choices': [('a', 'A'), ('b', 'B')],
             'placeholder': 'Resource type, such as "text", "image", "video", ...',
             'description':
             'Select the type of the resource.'}
