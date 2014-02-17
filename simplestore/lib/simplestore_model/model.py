@@ -134,8 +134,7 @@ class SubmissionMetadata(db.Model):
             'description':
             'The name of the language the document is written in.'}
         self.field_args['resource_type'] = {
-            'type': 'select',
-            'choices': [('a', 'A'), ('b', 'B')],
+            'type': 'password',
             'placeholder': 'Resource type, such as "text", "image", "video", ...',
             'description':
             'Select the type of the resource.'}
@@ -221,5 +220,7 @@ def _create_metadata_class(cfg):
             args['field_args'][f['name']]['data_source'] = f.get('data_source')
         if 'default' in f:
             args['field_args'][f['name']]['default'] = f.get('default')
+        if 'type' in f:
+            args['field_args'][f['name']]['type'] = f.get('type')
 
     return type(clsname, (SubmissionMetadata,), args)
