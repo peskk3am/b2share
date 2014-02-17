@@ -150,28 +150,27 @@ class TypeAheadStringField(StringField):
         super(TypeAheadStringField, self).__init__(**kwargs)
 
 
-# class PlaceholderStringInput(Input):
-#     input_type = "text"
-#
-#     def __call__(self, field, placeholder="", **kwargs):
-#         kwargs.setdefault('id', field.id)
-#         kwargs.setdefault('type', self.input_type)
-#         if 'value' not in kwargs:
-#             kwargs['value'] = field._value()
-#
-#         return HTMLString(
-#             '<input placeholder="{0}" {1}>'.format(
-#             field.placeholder, self.html_params(name=field.name, **kwargs)))
-#
-#
-# class PlaceholderStringField(StringField):
-#
-#     widget = PlaceholderStringInput()
-#     placeholder = ""
-#
-#     def __init__(self, placeholder="", **kwargs):
-#         self.placeholder = placeholder
-#         super(PlaceholderStringField, self).__init__(**kwargs)
+class PlaceholderStringInput(Input):
+    input_type = "text"
+
+    def __call__(self, field, placeholder="", **kwargs):
+         kwargs.setdefault('id', field.id)
+         kwargs.setdefault('type', self.input_type)
+         if 'value' not in kwargs:
+             kwargs['value'] = field._value()
+
+         return HTMLString(
+             '<input placeholder="{0}" {1}>'.format(
+             field.placeholder, self.html_params(name=field.name, **kwargs)))
+
+class PlaceholderStringField(StringField):
+
+    widget = PlaceholderStringInput()
+    placeholder = ""
+
+    def __init__(self, placeholder="", **kwargs):
+         self.placeholder = placeholder
+         super(PlaceholderStringField, self).__init__(**kwargs)
 
 
 class HTML5ModelConverter(ModelConverter):
@@ -206,10 +205,10 @@ class HTML5ModelConverter(ModelConverter):
 
     @converts('String')
     def conv_String(self, field_args, **extra):
-    #    if 'placeholder' in field_args:
-    #        return PlaceholderStringField(**field_args)
+        if 'placeholder' in field_args:
+            return PlaceholderStringField(**field_args)
 
         if 'data_provide' in field_args:
             return TypeAheadStringField(**field_args)
-        else:
-            return StringField(**field_args)
+
+        return StringField(**field_args)
