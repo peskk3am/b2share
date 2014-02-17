@@ -53,7 +53,8 @@ class SubmissionMetadata(db.Model):
     # optional
     contributors = db.Column(db.String(256))  # split on ;
     #language = db.Column(db.Enum(*babel.core.LOCALE_ALIASES.keys()))
-    resource_type = db.Column(db.String(256))  # XXX should be extracted to a separate class
+    # resource_type = db.Column(db.String(256))  # XXX should be extracted to a separate class
+    resource_type = db.Column(db.Enum(['Image','Text','Video']))
     alternate_identifier = db.Column(db.String(256))
     version = db.Column(db.String(128))
 
