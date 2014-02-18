@@ -21,6 +21,7 @@ from flask.ext.wtf.html5 import IntegerField, DecimalField, DateField
 from wtforms import DateTimeField as _DateTimeField
 from wtforms import DateField as _DateField
 from wtforms import BooleanField, StringField
+from wtforms import SelectField
 from wtforms.widgets import Input, HTMLString
 from flask import current_app
 
@@ -210,5 +211,8 @@ class HTML5ModelConverter(ModelConverter):
 
         if 'data_provide' in field_args:
             return TypeAheadStringField(**field_args)
+
+        if 'choices' in field_args:
+            return SelectField(**field_args)
 
         return StringField(**field_args)

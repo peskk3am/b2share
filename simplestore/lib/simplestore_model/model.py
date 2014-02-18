@@ -54,8 +54,7 @@ class SubmissionMetadata(db.Model):
     # optional
     contributors = db.Column(db.String(256))  # split on ;
     #language = db.Column(db.Enum(*babel.core.LOCALE_ALIASES.keys()))
-    # resource_type = db.Column(db.String(256))  # XXX should be extracted to a separate class
-    resource_type = db.Column(db.Enum(['Image','Text','Video']))
+    resource_type = db.Column(db.String(256))  # XXX should be extracted to a separate class
     alternate_identifier = db.Column(db.String(256))
     version = db.Column(db.String(128))
 
@@ -136,7 +135,8 @@ class SubmissionMetadata(db.Model):
             'description':
             'The name of the language the document is written in.'}
         self.field_args['resource_type'] = {
-            'placeholder': 'Resource type, such as "text", "image", "video", ...',
+            'choices': ["text", "image"],
+            # 'placeholder': 'Resource type, such as "text", "image", "video", ...',
             'description':
             'Select the type of the resource.'}
         self.field_args['alternate_identifier'] = {
