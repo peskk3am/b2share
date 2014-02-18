@@ -134,7 +134,7 @@ class SubmissionMetadata(db.Model):
             'description':
             'The name of the language the document is written in.'}
         self.field_args['resource_type'] = {
-            'choices': ['Text', 'Image', 'Video'], # if choices -> SelectField
+            'choices': ['Text', 'Image', 'Video', 'Other'], # if choices -> SelectField
             'description':
             'Select the type of the resource.'}
         self.field_args['alternate_identifier'] = {
