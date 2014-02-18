@@ -174,6 +174,27 @@ class PlaceholderStringField(StringField):
          super(PlaceholderStringField, self).__init__(**kwargs)
 
 
+class BSelectField():
+    def __init__(self, **field_args):
+        # make list of tuples for SelectField (only once)
+        if isinstance(field_args['choices'][0], basestring):
+            field_args['choices'] = [(x,x) for x in field_args['choices']]
+        self.field_args = field_args
+
+    def __call__(self, **field_args):
+        return SelectField(**field_args)
+
+
+class SelectFieldWithInput(BSelectField):
+    def __init__(self, **field_args):
+        super(SelectFieldWithInput, self).__init__(**field_args)
+        self.field_args['choices'].append(('other', field_args['other']))
+
+    def __call__(self, **field_args):
+        return SelectField(**field_args) \
+            + StringField({'name': field_args+'_text'})
+
+
 class HTML5ModelConverter(ModelConverter):
     def __init__(self, extra_converters=None):
         super(HTML5ModelConverter, self).__init__(extra_converters)
@@ -212,10 +233,10 @@ class HTML5ModelConverter(ModelConverter):
         if 'data_provide' in field_args:
             return TypeAheadStringField(**field_args)
 
-        if 'choices' in field_args:
-            if isinstance(field_args['choices'][0], basestring):
-                # make list of tuples for SelectField (only once)
-                field_args['choices'] = [(x,x) for x in field_args['choices']]
-            return SelectField(**field_args)
+        # SelectField
+        if 'other' in field_args:
+            return SelectFieldWithInput(**field_args)
+        elif 'choices' in field_args:
+            return BSelectField(**field_args)
 
         return StringField(**field_args)
