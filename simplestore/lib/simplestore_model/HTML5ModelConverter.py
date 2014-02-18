@@ -213,6 +213,7 @@ class HTML5ModelConverter(ModelConverter):
             return TypeAheadStringField(**field_args)
 
         if 'choices' in field_args:
-            return SelectField(choices=[(x,x) for x in field_args['choices']], **field_args)
+            field_args['choices'] = [(x,x) for x in field_args['choices']]
+            return SelectField(**field_args)
 
         return StringField(**field_args)
