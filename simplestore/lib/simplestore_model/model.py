@@ -58,7 +58,7 @@ class SubmissionMetadata(db.Model):
     version = db.Column(db.String(128))
 
     basic_fields = ['title', 'description', 'author', 'open_access',
-                    'licence', 'publisher', 'publication_date', 'tags']
+                    'licence', 'tags']
     optional_fields = ['contributors', 'resource_type',
                        'alternate_identifier', 'version']
 
@@ -134,8 +134,7 @@ class SubmissionMetadata(db.Model):
             'description':
             'The name of the language the document is written in.'}
         self.field_args['resource_type'] = {
-            'choices': ["text", "image"],
-            # 'placeholder': 'Resource type, such as "text", "image", "video", ...',
+            'choices': ['Text', 'Image', 'Video'], # if choices -> SelectField
             'description':
             'Select the type of the resource.'}
         self.field_args['alternate_identifier'] = {
