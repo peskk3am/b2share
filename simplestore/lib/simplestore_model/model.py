@@ -39,8 +39,7 @@ class SubmissionMetadata(db.Model):
     field_args = {}
 
     id = db.Column(db.Integer, primary_key=True)
-    # description = db.Column(db.Text(), nullable=False)
-    description = db.Column(db.String(128))
+    description = db.Column(db.Text(), nullable=False)
     author = db.Column(db.String(128))
     title = db.Column(db.String(256), nullable=False)
     open_access = db.Column(db.Boolean(), default=True)
