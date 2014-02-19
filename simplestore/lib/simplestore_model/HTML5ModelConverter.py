@@ -174,7 +174,7 @@ class PlaceholderStringField(StringField):
          super(PlaceholderStringField, self).__init__(**kwargs)
 
 
-class BSelectField():
+class BSelectField(object):
     def __init__(self, **field_args):
         # make list of tuples for SelectField (only once)
         if isinstance(field_args['choices'][0], basestring):
