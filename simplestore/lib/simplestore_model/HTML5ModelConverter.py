@@ -176,13 +176,13 @@ class PlaceholderStringField(StringField):
 
 class BSelectField(object):
     def __init__(self, **field_args):
-        # make list of tuples for SelectField (only once)
-        if isinstance(field_args['choices'][0], basestring):
-            field_args['choices'] = [(x,x) for x in field_args['choices']]
         self.field_args = field_args
+        # make list of tuples for SelectField (only once)
+        if isinstance(self.field_args['choices'][0], basestring):
+            self.field_args['choices'] = [(x,x) for x in self.field_args['choices']]
 
-    def __call__(self, **field_args):
-        return SelectField(**field_args)
+    def __call__(self):
+        return SelectField(self.field_args)
 
 
 class SelectFieldWithInput(BSelectField):
