@@ -22,7 +22,7 @@ from wtforms import DateTimeField as _DateTimeField
 from wtforms import DateField as _DateField
 from wtforms import BooleanField, StringField
 from wtforms import SelectField
-from wtforms.widgets import Input, HTMLString
+from wtforms.widgets import Input, Select, HTMLString
 from flask import current_app
 
 
@@ -174,15 +174,19 @@ class PlaceholderStringField(StringField):
          super(PlaceholderStringField, self).__init__(**kwargs)
 
 
-class BSelectField(object):
+class BSelect(Select):
+    def __call__(self, **field_args):
+         return SelectField(**field_args)
+
+class BSelectField(StringField):
+    widget = BSelect()
+
     def __init__(self, **field_args):
         self.field_args = field_args
         # make list of tuples for SelectField (only once)
         if isinstance(self.field_args['choices'][0], basestring):
             self.field_args['choices'] = [(x,x) for x in self.field_args['choices']]
-
-    def __call__(self):
-        return SelectField(self.field_args)
+        super(BSelectField, self).__init__(**field_args)
 
 
 class SelectFieldWithInput(BSelectField):
@@ -236,11 +240,7 @@ class HTML5ModelConverter(ModelConverter):
         # SelectField
         if 'other' in field_args:
             return SelectFieldWithInput(**field_args)
-        elif 'choices' in field_args:
-            sss = ""
-            for x in field_args:
-                sss += " "+field_args[x]
-                raise Exception(sss)
+        if 'choices' in field_args:
             return BSelectField(**field_args)
 
         return StringField(**field_args)
