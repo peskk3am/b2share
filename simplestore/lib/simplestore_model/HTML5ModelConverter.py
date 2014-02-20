@@ -178,7 +178,7 @@ class BSelect(Select):
     def __call__(self, **field_args):
          return SelectField(**field_args)
 
-class BSelectField(StringField):
+class BSelectField(SelectField):
     widget = BSelect()
 
     def __init__(self, **field_args):
