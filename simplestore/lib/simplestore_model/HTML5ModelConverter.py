@@ -189,20 +189,21 @@ class BSelectField(SelectField):
         super(BSelectField, self).__init__(**field_args)
 
 
-class SelectWithInput(Select,Input):
+class SelectWithInput(Select, Input):
     def __call__(self, field, **kwargs):
          return HTMLString(
              '<input type=text, name={1}, style="visibility:hidden;>'.format(self.html_params(name=field.name)))
 
-class SelectFieldWithInput(SelectField):
-    widget = BSelect()
+class SelectFieldWithInput():
+    widget = SelectWithInput()
 
     def __init__(self, **field_args):
         self.field_args = field_args
         # make list of tuples for SelectField (only once)
         if isinstance(self.field_args['choices'][0], basestring):
-            self.field_args['choices'] = [(x,x) for x in self.field_args['choices']]
-        super(SelectFieldWithInput, self).__init__(**field_args)
+            self.field_args['choices'] = [(x,x) for x in field_args['choices']]
+            self.field_args['choices'].append(('other', field_args['other']))
+            del self.field_args['other']
 
 
 class HTML5ModelConverter(ModelConverter):
@@ -244,11 +245,11 @@ class HTML5ModelConverter(ModelConverter):
             return TypeAheadStringField(**field_args)
 
         # SelectField
-        if 'choices' in field_args:
-            return BSelectField(**field_args)
+        #if 'choices' in field_args:
+        #    return BSelectField(**field_args)
 
         if 'other' in field_args:
-            return SelectFieldWithInput(**field_args)
+            return '<input type=text name=ahoj>'
 
 
         return StringField(**field_args)
