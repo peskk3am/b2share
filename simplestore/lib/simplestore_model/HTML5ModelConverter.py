@@ -239,6 +239,7 @@ class HTML5ModelConverter(ModelConverter):
         if 'other' in field_args:
             return SelectFieldWithInput(**field_args)
         elif 'choices' in field_args:
+            print "xxx"
             if 'label' not in field_args:
                 raise 'neni label na konci'
 
