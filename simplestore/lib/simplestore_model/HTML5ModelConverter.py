@@ -226,12 +226,14 @@ class HTML5ModelConverter(ModelConverter):
     @converts('Boolean')
     def conv_Boolean(self, field_args, **extra):
         if 'label' not in field_args:
-                raise 'neni label boolean na konci1'
+            raise BaseException('neni label boolean na konci1')
         return SwitchField(**field_args)
 
     @converts('String')
     def conv_String(self, field_args, **extra):
         if 'placeholder' in field_args:
+            if 'label' not in field_args:
+                raise BaseException('neni label placeholder na konci1')
             return PlaceholderStringField(**field_args)
 
         if 'data_provide' in field_args:
@@ -242,7 +244,7 @@ class HTML5ModelConverter(ModelConverter):
             return SelectFieldWithInput(**field_args)
         elif 'choices' in field_args:
             if 'label' not in field_args:
-                raise 'neni label na konci1'
+                raise BaseException('neni label na konci1')
 
             return BSelectField(**field_args)
 
