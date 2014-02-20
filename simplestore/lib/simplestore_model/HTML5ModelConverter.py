@@ -225,6 +225,8 @@ class HTML5ModelConverter(ModelConverter):
 
     @converts('Boolean')
     def conv_Boolean(self, field_args, **extra):
+        if 'label' not in field_args:
+                raise 'neni label boolean na konci1'
         return SwitchField(**field_args)
 
     @converts('String')
