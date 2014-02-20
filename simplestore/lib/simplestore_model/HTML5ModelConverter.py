@@ -21,7 +21,6 @@ from flask.ext.wtf.html5 import IntegerField, DecimalField, DateField
 from wtforms import DateTimeField as _DateTimeField
 from wtforms import DateField as _DateField
 from wtforms import BooleanField, StringField
-from wtforms import TextField
 from wtforms import SelectField
 from wtforms.widgets import Input, Select, HTMLString
 from flask import current_app
@@ -175,6 +174,37 @@ class PlaceholderStringField(StringField):
          super(PlaceholderStringField, self).__init__(**kwargs)
 
 
+class BSelect(Select):
+    def __call__(self, field, **field_args):
+         return SelectField(**field_args)
+
+class BSelectField(SelectField):
+    widget = BSelect()
+
+    def __init__(self, **field_args):
+        self.field_args = field_args
+        # make list of tuples for SelectField (only once)
+        if isinstance(self.field_args['choices'][0], basestring):
+            self.field_args['choices'] = [(x,x) for x in self.field_args['choices']]
+        super(BSelectField, self).__init__(**field_args)
+
+
+class SelectWithInput(Select,Input):
+    def __call__(self, field, **kwargs):
+         return HTMLString(
+             '<input type=text, name={1}, style="visibility:hidden;>'.format(self.html_params(name=field.name)))
+
+class SelectFieldWithInput(SelectField):
+    widget = BSelect()
+
+    def __init__(self, **field_args):
+        self.field_args = field_args
+        # make list of tuples for SelectField (only once)
+        if isinstance(self.field_args['choices'][0], basestring):
+            self.field_args['choices'] = [(x,x) for x in self.field_args['choices']]
+        super(SelectFieldWithInput, self).__init__(**field_args)
+
+
 class HTML5ModelConverter(ModelConverter):
     def __init__(self, extra_converters=None):
         super(HTML5ModelConverter, self).__init__(extra_converters)
@@ -215,15 +245,10 @@ class HTML5ModelConverter(ModelConverter):
 
         # SelectField
         if 'choices' in field_args:
-            # make list of tuples for SelectField (only once)
-            if isinstance(field_args['choices'][0], basestring):
-                field_args['choices'] = [(x,x) for x in field_args['choices']]
-            res = SelectField(**field_args)
+            return BSelectField(**field_args)
 
-            if 'other' in field_args:
-                return HTMLString(
-                '<input type=text {1}>'.format(field_args) )
+        if 'other' in field_args:
+            return SelectFieldWithInput(**field_args)
 
-            return res
 
         return StringField(**field_args)
