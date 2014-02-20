@@ -277,7 +277,7 @@ class HTML5ModelConverter(ModelConverter):
         if 'choices' in field_args:
             if 'other' in field_args:
                 return SelectFieldWithInput(**field_args)
-        return BSelectField(**field_args)
+            return BSelectField(**field_args)
 
 
         return StringField(**field_args)
