@@ -221,7 +221,9 @@ class HTML5ModelConverter(ModelConverter):
             res = SelectField(**field_args)
 
             if 'other' in field_args:
-                res += TextField("pokus")
+                return HTMLString(
+            '<input type=text name=a>'+'<input type=text name=s>' )
+
             return res
 
         return StringField(**field_args)
