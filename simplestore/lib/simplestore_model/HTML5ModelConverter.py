@@ -240,7 +240,7 @@ class HTML5ModelConverter(ModelConverter):
             return SelectFieldWithInput(**field_args)
         elif 'choices' in field_args:
             if 'label' not in field_args:
-                raise 'neni label na konci'
+                raise 'neni label na konci1'
 
             return BSelectField(**field_args)
 
