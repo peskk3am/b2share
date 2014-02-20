@@ -192,7 +192,7 @@ class BSelectField(SelectField):
 class SelectWithInput(Select, Input):
     def __call__(self, field, **kwargs):
          return HTMLString(
-             '<input type=text, name={1}, style="visibility:hidden;>'.format(self.html_params(name=field.name)))
+             '<input type=text, name={1}>'.format(self.html_params(name=field.name)))
 
 class SelectFieldWithInput():
     widget = SelectWithInput()
@@ -245,11 +245,11 @@ class HTML5ModelConverter(ModelConverter):
             return TypeAheadStringField(**field_args)
 
         # SelectField
-        #if 'choices' in field_args:
-        #    return BSelectField(**field_args)
+        if 'choices' in field_args:
+            return BSelectField(**field_args)
 
         if 'other' in field_args:
-            return '<input type=text name=ahoj>'
+            return SelectFieldWithInput(**field_args)
 
 
         return StringField(**field_args)
