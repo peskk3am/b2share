@@ -176,8 +176,6 @@ class PlaceholderStringField(StringField):
 
 class BSelectField(object):
     def __init__(self, **field_args):
-        if 'label' not in field_args:
-            raise 'neni label'
         self.field_args = field_args
         # make list of tuples for SelectField (only once)
         if isinstance(self.field_args['choices'][0], basestring):
@@ -242,6 +240,7 @@ class HTML5ModelConverter(ModelConverter):
             sss = ""
             for x in field_args:
                 sss += " "+field_args[x]
+                raise Exception(sss)
             return BSelectField(**field_args)
 
         return StringField(**field_args)
