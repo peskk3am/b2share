@@ -22,7 +22,10 @@ from wtforms import DateTimeField as _DateTimeField
 from wtforms import DateField as _DateField
 from wtforms import BooleanField, StringField
 from wtforms import SelectField
+from wtforms import Field
 from wtforms.widgets import Input, Select, HTMLString
+from wtforms.widgets.core import html_params
+from wtforms.compat import text_type, escape
 from flask import current_app
 
 
@@ -189,12 +192,39 @@ class BSelectField(SelectField):
         super(BSelectField, self).__init__(**field_args)
 
 
-class SelectWithInput(Select, Input):
-    def __call__(self, field, **kwargs):
-         return HTMLString(
-             '<input type=text, name={1}>'.format(self.html_params(name=field.name)))
 
-class SelectFieldWithInput():
+
+class SelectWithInput(object):
+    """
+    Renders a select field. With hidden input field for "other" option.
+
+    The field must provide an `iter_choices()` method which the widget will
+    call on rendering; this method must yield tuples of
+    `(value, label, selected)`.
+    """
+
+    def __call__(self, field, **kwargs):
+        kwargs.setdefault('id', field.id)
+        html = ['<select %s>' % html_params(name=field.name, **kwargs)]
+        for val, label, selected in field.iter_choices():
+            html.append(self.render_option(val, label, selected))
+        html.append('</select>')
+        html.append('<input type=text, name={1}>'.format(html_params(name=field.name)))
+        return HTMLString(''.join(html))
+
+    @classmethod
+    def render_option(cls, value, label, selected, **kwargs):
+        if value is True:
+            # Handle the special case of a 'True' value.
+            value = text_type(value)
+
+        options = dict(kwargs, value=value)
+        if selected:
+            options['selected'] = True
+        return HTMLString('<option %s>%s</option>' % (html_params(**options), escape(text_type(label))))
+
+
+class SelectFieldWithInput(Field):
     widget = SelectWithInput()
 
     def __init__(self, **field_args):
@@ -246,10 +276,9 @@ class HTML5ModelConverter(ModelConverter):
 
         # SelectField
         if 'choices' in field_args:
-            return BSelectField(**field_args)
-
-        if 'other' in field_args:
-            return SelectFieldWithInput(**field_args)
+            if 'other' in field_args:
+                return SelectFieldWithInput(**field_args)
+        return BSelectField(**field_args)
 
 
         return StringField(**field_args)
