@@ -239,12 +239,9 @@ class HTML5ModelConverter(ModelConverter):
         if 'other' in field_args:
             return SelectFieldWithInput(**field_args)
         elif 'choices' in field_args:
-            if 'label' not in field_args:
-                sss = ""
-                for x in field_args:
-                    sss += " "+field_args[x]
-                # raise Exception('neni label na konci1: '+sss)
-
+            sss = ""
+            for x in field_args:
+                sss += " "+field_args[x]
             return BSelectField(**field_args)
 
         return StringField(**field_args)
