@@ -223,7 +223,7 @@ class SelectWithInput(object):
         return HTMLString('<option %s>%s</option>' % (html_params(**options), escape(text_type(label))))
 
 
-class SelectFieldWithInput(Field):
+class SelectFieldWithInput(SelectField):
     widget = SelectWithInput()
 
     def __init__(self, **field_args):
@@ -233,6 +233,7 @@ class SelectFieldWithInput(Field):
             self.field_args['choices'] = [(x,x) for x in field_args['choices']]
             self.field_args['choices'].append(('other', field_args['other']))
             del self.field_args['other']
+        super(SelectFieldWithInput, self).__init__(**field_args)
 
 
 class HTML5ModelConverter(ModelConverter):
