@@ -24,7 +24,8 @@ from wtforms import BooleanField, StringField
 from wtforms import SelectField
 from wtforms import Field
 from wtforms.widgets import Input, Select, HTMLString, html_params
-from wtforms.compat import text_type, escape
+from wtforms.compat import text_type
+from cgi import escape
 from flask import current_app
 
 
@@ -211,7 +212,6 @@ class SelectWithInput(object):
         html.append('<input type=text, name={1}>'.format(html_params(name=field.name)))
         return HTMLString(''.join(html))
 
-    @classmethod
     def render_option(cls, value, label, selected, **kwargs):
         if value is True:
             # Handle the special case of a 'True' value.
