@@ -175,7 +175,7 @@ class PlaceholderStringField(StringField):
 
 
 class BSelect(Select):
-    def __call__(self, **field_args):
+    def __call__(self, field, **field_args):
          return SelectField(**field_args)
 
 class BSelectField(SelectField):
