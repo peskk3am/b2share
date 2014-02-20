@@ -215,7 +215,7 @@ class HTML5ModelConverter(ModelConverter):
         # SelectField
         if 'choices' in field_args:
             # make list of tuples for SelectField (only once)
-            if isinstance(self.field_args['choices'][0], basestring):
+            if isinstance(field_args['choices'][0], basestring):
                 field_args['choices'] = [(x,x) for x in field_args['choices']]
             res = SelectField(**field_args)
 
