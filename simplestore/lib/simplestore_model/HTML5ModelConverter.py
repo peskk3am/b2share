@@ -176,7 +176,7 @@ class PlaceholderStringField(StringField):
 
 class BSelectField(object):
     def __init__(self, **field_args):
-        if ['label'] in field_args:
+        if 'label' in field_args:
             raise 'je label'
         self.field_args = field_args
         # make list of tuples for SelectField (only once)
