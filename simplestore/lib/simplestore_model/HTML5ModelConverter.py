@@ -21,6 +21,7 @@ from flask.ext.wtf.html5 import IntegerField, DecimalField, DateField
 from wtforms import DateTimeField as _DateTimeField
 from wtforms import DateField as _DateField
 from wtforms import BooleanField, StringField
+from wtforms import TextField
 from wtforms import SelectField
 from wtforms.widgets import Input, Select, HTMLString
 from flask import current_app
