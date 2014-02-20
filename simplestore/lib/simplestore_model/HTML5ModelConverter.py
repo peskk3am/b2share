@@ -222,7 +222,7 @@ class HTML5ModelConverter(ModelConverter):
 
             if 'other' in field_args:
                 return HTMLString(
-            '<input type=text name=a>'+'<input type=text name=s>' )
+                '<input type=text {1}>'.format(field_args) )
 
             return res
 
