@@ -85,7 +85,7 @@
         var value = $(this).val();
         if (value == 'other') {
             var other = prompt( "Please indicate other value:"+this.name );
-           $(this.name+"_input").show();
+           $("#"+this.name+"_input").show();
         }
     });
 });
