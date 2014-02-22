@@ -209,7 +209,7 @@ class SelectWithInput(object):
         for val, label, selected in field.iter_choices():
             html.append(self.render_option(val, label, selected))
         html.append('</select>')
-        html.append('<input type=text, style="display: none" name={0}>'.format(html_params(name=field.name+"_input")))
+        html.append('<input type=text, style="display: none" {0}>'.format(html_params(name=field.name+"_input")))
         return HTMLString(''.join(html))
 
     def render_option(cls, value, label, selected, **kwargs):

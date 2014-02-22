@@ -79,4 +79,13 @@
   });
 </script>
 
-<script src="js/select_with_input.js"></script>
+<script>
+    $(function() {
+    $('select').change( function() {
+        var value = $(this).val();
+        if (value == 'other') {
+           $(this.name+"_input").show();
+        }
+    });
+});    
+</script>
