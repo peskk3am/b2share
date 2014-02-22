@@ -84,7 +84,7 @@
     $('select').change( function() {
         var value = $(this).val();
         if (value == 'other') {
-            var other = prompt( "Please indicate other value:" );
+            var other = prompt( "Please indicate other value:"+this );
            $(this.name+"_input").show();
         }
     });
