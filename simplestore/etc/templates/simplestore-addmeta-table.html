@@ -82,9 +82,9 @@
 <script>
     $(function() {
     $('select').change( function() {
-        var other = prompt( "Please indicate other value:" );
         var value = $(this).val();
         if (value == 'other') {
+            var other = prompt( "Please indicate other value:" );
            $(this.name+"_input").show();
         }
     });
