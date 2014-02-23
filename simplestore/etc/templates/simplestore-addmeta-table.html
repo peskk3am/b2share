@@ -80,12 +80,15 @@
 </script>
 
 <script>
-    $(function() {
+    $(function(){
     $('select').change( function() {
         var value = $(this).val();
-        if (value == 'other') {
-            var other = prompt( "Please indicate other value:"+this.name );
+        if (value == 'other'){
            $("#"+this.name+"_input").show();
+           $("#"+this.name+"_input").focus();
+        }
+        else{
+           $("#"+this.name+"_input").hide();
         }
     });
 });
