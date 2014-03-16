@@ -21,6 +21,7 @@ def createHandle(location,checksum=None,suffix=''):
      suffix: The suffix of the handle. Default: ''.
      Returns the URI of the new handle, raises a 503 exception if an error occurred.
     """
+    current_app.logger.error("**************** createHandle")
 
     httplib2.debuglevel = 4
 
