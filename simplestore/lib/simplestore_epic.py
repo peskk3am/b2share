@@ -77,24 +77,28 @@ def createHandle(location,checksum=None,suffix=''):
     current_app.logger.debug("json: " + new_handle_json)
     current_app.logger.error("**************** createHandle3")
 
-    try:
-        response, content = http.request(uri, method='POST',
-                headers=hdrs, body=new_handle_json)
-    except Exception as e:
-        current_app.logger.error("**************** createHandle4")
-
-        current_app.logger.debug(e)
-        abort(503)
+    if CFG_EPIC_BASEURL == "local":
+        hdl = location
     else:
-        current_app.logger.debug("Request completed")
+        try:
+            response, content = http.request(uri, method='POST',
+                    headers=hdrs, body=new_handle_json)
+        except Exception as e:
+            current_app.logger.error("**************** createHandle4")
 
-    if response.status != 201:
-        current_app.logger.debug(
-                  "Not Created: Response status: %s" % response.status)
-        abort(response.status)
+            current_app.logger.debug(e)
+            abort(503)
+        else:
+            current_app.logger.debug("Request completed")
 
-    # get the handle as returned by EPIC
-    hdl = response['location']
+        if response.status != 201:
+            current_app.logger.debug(
+                      "Not Created: Response status: %s" % response.status)
+            abort(response.status)
+
+        # get the handle as returned by EPIC
+        hdl = response['location']
+
     pid = '/'.join(urlparse(hdl).path.split('/')[3:])
     current_app.logger.error("**************** createHandle5")
 
