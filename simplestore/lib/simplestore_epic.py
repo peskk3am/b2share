@@ -75,9 +75,9 @@ def createHandle(location,checksum=None,suffix=''):
                                       'parsed_data': location}])
 
     current_app.logger.debug("json: " + new_handle_json)
-    current_app.logger.error("**************** createHandle3" + CFG_EPIC_BASEURL)
+    current_app.logger.error("**************** createHandle3" + CFG_EPIC_BASEURL + "*****")
 
-    if CFG_EPIC_BASEURL == "local":
+    if not CFG_EPIC_BASEURL:
         hdl = location
     else:
         try:
