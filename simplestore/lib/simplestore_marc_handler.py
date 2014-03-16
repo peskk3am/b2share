@@ -173,6 +173,8 @@ def add_epic_pid(rec, recid, checksum):
     location = CFG_SITE_SECURE_URL + '/record/' + str(recid)
     try:
         pid = createHandle(location, checksum)
+        current_app.logger.error("8888888888888: "+pid)
+
         record_add_field(rec, '024', ind1='7',
                          subfields=[('2', 'PID'), ('a', pid)])
     except HTTPException as e:
