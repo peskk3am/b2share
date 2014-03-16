@@ -45,9 +45,12 @@ def createHandle(location,checksum=None,suffix=''):
         http = httplib2.Http(proxy_info = httplib2.ProxyInfo(socks.PROXY_TYPE_HTTP,
                              proxy, proxyPort))
         http.disable_ssl_certificate_validation = True
+        current_app.logger.error("**************** createHandle1")
+
     else:
         http = httplib2.Http()
         http.disable_ssl_certificate_validation = True
+        current_app.logger.error("**************** createHandle2")
 
     http.add_credentials(username, password)
 
@@ -72,11 +75,14 @@ def createHandle(location,checksum=None,suffix=''):
                                       'parsed_data': location}])
 
     current_app.logger.debug("json: " + new_handle_json)
+    current_app.logger.error("**************** createHandle3")
 
     try:
         response, content = http.request(uri, method='POST',
                 headers=hdrs, body=new_handle_json)
     except Exception as e:
+        current_app.logger.error("**************** createHandle4")
+
         current_app.logger.debug(e)
         abort(503)
     else:
@@ -90,6 +96,7 @@ def createHandle(location,checksum=None,suffix=''):
     # get the handle as returned by EPIC
     hdl = response['location']
     pid = '/'.join(urlparse(hdl).path.split('/')[3:])
+    current_app.logger.error("**************** createHandle5")
 
     return urljoin(CFG_HANDLE_SYSTEM_BASEURL, pid)
 
