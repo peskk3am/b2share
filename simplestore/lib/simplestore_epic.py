@@ -21,7 +21,6 @@ def createHandle(location,checksum=None,suffix=''):
      suffix: The suffix of the handle. Default: ''.
      Returns the URI of the new handle, raises a 503 exception if an error occurred.
     """
-    current_app.logger.error("**************** createHandle")
 
     httplib2.debuglevel = 4
 
@@ -45,12 +44,9 @@ def createHandle(location,checksum=None,suffix=''):
         http = httplib2.Http(proxy_info = httplib2.ProxyInfo(socks.PROXY_TYPE_HTTP,
                              proxy, proxyPort))
         http.disable_ssl_certificate_validation = True
-        current_app.logger.error("**************** createHandle1")
-
     else:
         http = httplib2.Http()
         http.disable_ssl_certificate_validation = True
-        current_app.logger.error("**************** createHandle2")
 
     http.add_credentials(username, password)
 
@@ -75,7 +71,6 @@ def createHandle(location,checksum=None,suffix=''):
                                       'parsed_data': location}])
 
     current_app.logger.debug("json: " + new_handle_json)
-    current_app.logger.error("**************** createHandle3" + CFG_EPIC_BASEURL + "*****")
 
     if not CFG_EPIC_BASEURL:
         hdl = location
@@ -84,8 +79,6 @@ def createHandle(location,checksum=None,suffix=''):
             response, content = http.request(uri, method='POST',
                     headers=hdrs, body=new_handle_json)
         except Exception as e:
-            current_app.logger.error("**************** createHandle4")
-
             current_app.logger.debug(e)
             abort(503)
         else:
@@ -100,7 +93,6 @@ def createHandle(location,checksum=None,suffix=''):
         hdl = response['location']
 
     pid = '/'.join(urlparse(hdl).path.split('/')[3:])
-    current_app.logger.error("**************** createHandle5")
 
     return urljoin(CFG_HANDLE_SYSTEM_BASEURL, pid)
 
