@@ -123,7 +123,7 @@ def delete(request, sub_id):
     result = ""
 
     upload_dir = os.path.join(CFG_SIMPLESTORE_UPLOAD_FOLDER, sub_id)
-    filename = request.form['filename']
+    filename = request.form['secure_filename']
 
     files = os.listdir(upload_dir)
     # delete all for minute
