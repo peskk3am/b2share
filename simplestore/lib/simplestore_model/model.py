@@ -162,8 +162,8 @@ class SubmissionMetadata(db.Model):
         }
         self.field_args['creator'] = {
             'placeholder': 'author 1; author 2; ... ',
-            'description': 'A semicolon separated list of authors' +\ 
-            'of the resource.'
+            'description': 
+            'A semicolon separated list of authors of the resource.'
         }
 
 def _create_metadata_class(cfg):
