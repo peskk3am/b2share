@@ -42,7 +42,7 @@ def add_basic_fields(rec, form, email):
         if form['title']:
             record_add_field(rec, '245', subfields=[('a', remove_html_markup(form['title']))])
 
-        if form['creator']:            
+        if form['creator']:        
             for kw in form['creator'].split(';'):
                 if kw and not kw.isspace():
                     record_add_field(rec, '100', subfields=[('a', remove_html_markup(kw.strip()))])
@@ -165,10 +165,16 @@ def add_domain_fields(rec, form):
     for fs in meta.fieldsets:
         if fs.name != 'Generic':  # TODO: this is brittle; get from somewhere
             for k in (fs.optional_fields + fs.basic_fields):
-                current_app.logger.error("----------------: "+k)
                 if form[k]:
-                    current_app.logger.error("**************: "+form[k])
-                    record_add_field(rec, '690',
+                    try:
+                        fields = form.getlist(k)
+                        for f in fields:
+                            record_add_field(rec, '690',
+                                     subfields=[('a', k), ('b', f)])
+                    except:
+                        current_app.logger.error("*******: "+e)
+                    else:
+                        record_add_field(rec, '690',
                                      subfields=[('a', k), ('b', form[k])])
 
 
