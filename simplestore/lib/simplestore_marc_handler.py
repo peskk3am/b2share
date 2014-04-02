@@ -43,6 +43,7 @@ def add_basic_fields(rec, form, email):
             record_add_field(rec, '245', subfields=[('a', remove_html_markup(form['title']))])
 
         if form['creator']:
+            current_app.logger.error("CREATOR:" + form['creator'])
             for kw in form['creator'].split(';'):
                 if kw and not kw.isspace():
                     record_add_field(rec, '100', subfields=[('a', remove_html_markup(kw.strip()))])
