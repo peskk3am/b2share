@@ -29,13 +29,13 @@ fields = [{'name':'language_code',
                           'of the resource (Text, Audio, Video, Time-Series, Photo, etc.)'},
           {'name':'project_name',
            'display_text':'Project Name',
+           'add_more': True,
+           'placeholder': "qqqq",
            'col_type':db.String(256),
            'description': 'This element allows the depositor to specify the projects ' +\
                           'which were at the source of the creation of the resource'},
           {'name':'quality',
            'display_text':'Quality',
-           'add_more': True,
-           'placeholder': "qqqq",
            'col_type':db.String(256),
            'description': 'This element allows depositors to indicate the quality of ' +\
                           'the resource allowing potential users to immediately see ' +\
