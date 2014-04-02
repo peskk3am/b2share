@@ -162,6 +162,7 @@ class SubmissionMetadata(db.Model):
         }
         self.field_args['creator'] = {
             'placeholder': 'author 1; author 2; ... ',
+            'add_fields': True,
             'description': 
             'A semicolon separated list of authors of the resource.'
         }
@@ -246,5 +247,9 @@ def _create_metadata_class(cfg):
             args['field_args'][f['name']]['value'] = f.get('value')
         if 'choices' in f:
             args['field_args'][f['name']]['choices'] = f.get('choices')
+        if 'other' in f:
+            args['field_args'][f['name']]['other'] = f.get('other')
+        if 'add_fields' in f:
+            args['field_args'][f['name']]['add_fields'] = f.get('add_fields')
 
     return type(clsname, (SubmissionMetadata,), args)

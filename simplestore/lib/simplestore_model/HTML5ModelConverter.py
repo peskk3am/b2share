@@ -180,13 +180,13 @@ class PlaceholderStringField(StringField):
 class SelectWithInput(Select):
     def __call__(self, field, **kwargs):
         kwargs.setdefault('id', field.id)
-        html = ['<select %s>' % html_params(name=field.name, **kwargs)]
+        html.append(['<select %s>' % html_params(name=field.name, **kwargs)])
         for val, label, selected in field.iter_choices():
             html.append(self.render_option(val, label, selected))
         html.append('</select>')
         html.append('<input type=text style="display: none" {0} {1} >'
             .format(html_params(name=field.name+"_input"),
-                    html_params(id=field.name+"_input")))
+                    html_params(id=field.name+"_input")))                          
         return HTMLString(''.join(html))
 
 
@@ -200,6 +200,28 @@ class SelectFieldWithInput(SelectField):
             self.field_args['choices'] = [(x,x) for x in field_args['choices']]
             self.field_args['choices'].append(('other', other))
         super(SelectFieldWithInput, self).__init__(**field_args)
+
+
+class AddFieldInput(Input):
+    input_type = "text"
+
+    def __call__(self, field, **kwargs):
+        kwargs.setdefault('id', field.id)
+        html = ['<div id="itemRows">']
+        html = ('<input placeholder="{0}" %s>' % placeholder, 
+                html_params(name=field.name, **kwargs)
+        html.append('<input onclick="addRow(this.form);" type="button" value="Add row" >')              
+        html.append('</div>')
+        return HTMLString(''.join(html))
+
+class AddField(StringField):
+    widget = AddFieldInput()
+    placeholder = ""
+
+    def __init__(self, add_field=True, placeholder="", **field_args):
+        self.field_args = field_args
+        self.placeholder = placeholder
+        super(AddField, self).__init__(**field_args)
 
 
 class HiddenInput(Input):
@@ -268,6 +290,9 @@ class HTML5ModelConverter(ModelConverter):
         hidden = self.handle_hidden_field(field_args)
         if hidden:
             return hidden
+
+        if 'add_field' in field_args:
+            return AddField(**field_args)
 
         if 'placeholder' in field_args:
             return PlaceholderStringField(**field_args)
