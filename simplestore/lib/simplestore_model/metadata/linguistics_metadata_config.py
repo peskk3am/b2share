@@ -34,8 +34,8 @@ fields = [{'name':'language_code',
                           'which were at the source of the creation of the resource'},
           {'name':'quality',
            'display_text':'Quality',
-           #'add_more': True,
-           #'placeholder': "qqqq",
+           'add_more': True,
+           'placeholder': "qqqq",
            'col_type':db.String(256),
            'description': 'This element allows depositors to indicate the quality of ' +\
                           'the resource allowing potential users to immediately see ' +\
