@@ -165,7 +165,10 @@ def add_domain_fields(rec, form):
     for fs in meta.fieldsets:
         if fs.name != 'Generic':  # TODO: this is brittle; get from somewhere
             for k in (fs.optional_fields + fs.basic_fields):
-                current_app.logger.error("*******: "+k)
+                current_app.logger.error("*******1: "+k)
+                current_app.logger.error("*******2: "+form[k])
+                current_app.logger.error("*******3: "+type(form[k]) )
+                
                 if form[k]:
                     try:
                         current_app.logger.error("1111111111: "+k)
