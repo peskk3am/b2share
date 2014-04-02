@@ -28,14 +28,14 @@ fields = [{'name':'language_code',
            'description': 'This element allows the depositor to specify the type ' +\
                           'of the resource (Text, Audio, Video, Time-Series, Photo, etc.)'},
           {'name':'project_name',
+           'placeholder':'project name',
            'display_text':'Project Name',
            'col_type':db.String(256),
            'description': 'This element allows the depositor to specify the projects ' +\
                           'which were at the source of the creation of the resource'},
           {'name':'quality',
            'display_text':'Quality',
-           'choices':['A', 'B', 'C'],
-           'other': 'Other...', # other -> dynamic input text field
+           'choices':['A', 'B', 'C'],           
            'col_type':db.String(256),
            'description': 'This element allows depositors to indicate the quality of ' +\
                           'the resource allowing potential users to immediately see ' +\
