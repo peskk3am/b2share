@@ -114,10 +114,10 @@
         rowNum ++;
         var row = '<p id="rowNum'+rowNum+'"><input id="'+name+'" type="text" name="'+name+'[]" '+placeholder+'>';
         row += '<input type="button" value="Remove" onclick="removeRow('+rowNum+');"></p>';
-        jQuery('#itemRows').append(row);
+        $('#itemRows').append(row);
     }
     
     function removeRow(rnum) {
-        jQuery('#rowNum'+rnum).remove();
+        $('#rowNum'+rnum).remove();
     }
 </script>
