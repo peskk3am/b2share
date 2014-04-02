@@ -168,6 +168,7 @@ def add_domain_fields(rec, form):
                 current_app.logger.error("*******: "+k)
                 if form[k]:
                     try:
+                        current_app.logger.error("1111111111: "+k)
                         fields = form.getlist(k)
                         for f in fields:
                             record_add_field(rec, '690',
@@ -177,7 +178,7 @@ def add_domain_fields(rec, form):
                     else:
                         record_add_field(rec, '690',
                                      subfields=[('a', k), ('b', form[k])])
-
+ 
 
 def add_epic_pid(rec, recid, checksum):
     """ Adds EPIC PID to the record. If registration fails, can
