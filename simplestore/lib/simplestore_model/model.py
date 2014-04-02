@@ -162,7 +162,6 @@ class SubmissionMetadata(db.Model):
         }
         self.field_args['creator'] = {
             'placeholder': 'author 1; author 2; ... ',
-            'delimiter': ",",
             'description': 
             'A semicolon separated list of authors of the resource.'
         }
