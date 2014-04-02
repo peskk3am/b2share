@@ -208,8 +208,8 @@ class AddFieldInput(Input):
     def __call__(self, field, **kwargs):
         kwargs.setdefault('id', field.id)
         html = ['<div id="itemRows">']
-        html = ('<input placeholder="{0}" %s>' % placeholder, 
-                html_params(name=field.name, **kwargs)
+        html.append('<input placeholder="{0}" %s>' % placeholder, 
+                html_params(name=field.name, **kwargs))
         html.append('<input onclick="addRow(this.form);" type="button" value="Add row" >')              
         html.append('</div>')
         return HTMLString(''.join(html))
