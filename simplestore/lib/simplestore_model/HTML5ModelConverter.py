@@ -218,7 +218,7 @@ class AddField(StringField):
     widget = AddFieldInput()
     placeholder = ""
 
-    def __init__(self, add_field=True, placeholder="", **field_args):
+    def __init__(self, add_fields="", placeholder="", **field_args):
         self.field_args = field_args
         self.placeholder = placeholder
         super(AddField, self).__init__(**field_args)
@@ -291,7 +291,7 @@ class HTML5ModelConverter(ModelConverter):
         if hidden:
             return hidden
 
-        if 'add_field' in field_args:
+        if 'add_fields' in field_args:
             return AddField(**field_args)
 
         if 'placeholder' in field_args:
