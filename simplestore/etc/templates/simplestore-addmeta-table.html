@@ -107,11 +107,11 @@
 
 <script type="text/javascript">
     var rowNum = 0;
-    function addRow(frm) {
+    function addRow(frm, placeholder, name) {
         rowNum ++;
-        var row = '<p id="rowNum'+rowNum+'"><input type="text" name="name[]" value="'+frm.add_name.value+'"> <input type="button" value="Remove" onclick="removeRow('+rowNum+');"></p>';
+        var row = '<p id="rowNum'+rowNum+'"><input type="text" name="name[]" value="'+frm.name.value+'"> <input type="button" value="Remove" onclick="removeRow('+rowNum+');"></p>';
         jQuery('#itemRows').append(row);
-        frm.add_name.value = '';
+        frm.name.value = '';
     }
     
     function removeRow(rnum) {
