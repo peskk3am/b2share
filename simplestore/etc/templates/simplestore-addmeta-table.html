@@ -109,7 +109,7 @@
     var rowNum = 0;
     function addRow(frm, placeholder, name) {
         if (placeholder){
-          placeholder = 'placeholder="'+placeholder+(rowNum+1)+'"';
+          placeholder = 'placeholder="'+placeholder+' '+(rowNum+1)+'"';
         }
         rowNum ++;
         var row = '<p id="rowNum'+rowNum+'"><input id="'+name+'" type="text" name="'+name+'[]" '+placeholder+'>';
