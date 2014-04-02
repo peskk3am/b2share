@@ -109,10 +109,10 @@
     var rowNum = 0;
     function addRow(frm, placeholder, name) {
         if (placeholder){
-          placeholder += " "+(rowNum+1);
+          placeholder = 'placeholder="'+placeholder+(rowNum+1)+'"';
         }
         rowNum ++;
-        var row = '<p id="rowNum'+rowNum+'"><input type="text" name="name[]" placeholder="'+placeholder+'">';
+        var row = '<p id="rowNum'+rowNum+'"><input type="text" name="'+name+'[]" '+placeholder+'>';
         row += '<input type="button" value="Remove" onclick="removeRow('+rowNum+');"></p>';
         jQuery('#itemRows').append(row);
     }
