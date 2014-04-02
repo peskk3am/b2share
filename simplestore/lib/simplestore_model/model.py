@@ -161,8 +161,8 @@ class SubmissionMetadata(db.Model):
             'Any kind of other reference such as a URN, URI or an ISBN number.'
         }
         self.field_args['creator'] = {
-            #'placeholder': 'author 1; author 2; ... ',
-            'add_more': True,
+            'placeholder': 'author',
+            # 'add_more': True,
             'description': 
             'A semicolon separated list of authors of the resource.'
         }
