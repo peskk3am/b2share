@@ -205,7 +205,7 @@ class SelectFieldWithInput(SelectField):
 class AddFieldInput(Input):
     input_type = "text"
 
-    def __call__(self, field, **kwargs):
+    def __call__(self, field, placeholder="", **kwargs):
         kwargs.setdefault('id', field.id)
         html = ['<div id="itemRows">']
         html.append('<input placeholder="{0}" %s>' % placeholder, 
