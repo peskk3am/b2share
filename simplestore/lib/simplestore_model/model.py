@@ -244,4 +244,7 @@ def _create_metadata_class(cfg):
             args['field_args'][f['name']]['placeholder'] = f.get('placeholder')
         if 'value' in f:
             args['field_args'][f['name']]['value'] = f.get('value')
+        if 'choices' in f:
+            args['field_args'][f['name']]['choices'] = f.get('choices')
+
     return type(clsname, (SubmissionMetadata,), args)
