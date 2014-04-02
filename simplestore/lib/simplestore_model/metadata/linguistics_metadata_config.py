@@ -35,6 +35,7 @@ fields = [{'name':'language_code',
           {'name':'quality',
            'display_text':'Quality',
            'choices':['A', 'B', 'C'],
+           'other': 'Other...', # other -> dynamic input text field
            'col_type':db.String(256),
            'description': 'This element allows depositors to indicate the quality of ' +\
                           'the resource allowing potential users to immediately see ' +\
