@@ -167,7 +167,7 @@ def add_domain_fields(rec, form):
             for k in (fs.optional_fields + fs.basic_fields):
                 current_app.logger.error("*******1: "+k)
                 current_app.logger.error("*******2: "+form[k])
-                current_app.logger.error("*******3: "+type(form[k]) )
+                current_app.logger.error(type(form[k]))
                 
                 if form[k]:
                     try:
