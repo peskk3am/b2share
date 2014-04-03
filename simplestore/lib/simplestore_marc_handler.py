@@ -170,14 +170,11 @@ def add_domain_fields(rec, form):
         if fs.name != 'Generic':  # TODO: this is brittle; get from somewhere
             for k in (fs.optional_fields + fs.basic_fields):                
                 if form[k]:
-                    try:
-                        fields = form.getlist(k)
-                        for f in fields:
+                    fields = form.getlist(k)
+                    for f in fields:
+                        if f and not f.isspace():
                             record_add_field(rec, '690',
                                      subfields=[('a', k), ('b', f)])
-                    except:                        
-                        record_add_field(rec, '690',
-                                     subfields=[('a', k), ('b', form[k])])
  
 
 def add_epic_pid(rec, recid, checksum):
