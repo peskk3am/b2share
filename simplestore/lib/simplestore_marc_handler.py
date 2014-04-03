@@ -80,7 +80,7 @@ def add_basic_fields(rec, form, email):
             fields = form.getlist('contributors')
             for f in fields:
                 if f and not f.isspace():
-                record_add_field(rec, '700', subfields=[('a', remove_html_markup(f.strip()))])
+                    record_add_field(rec, '700', subfields=[('a', remove_html_markup(f.strip()))])
 
         record_add_field(rec, '546', subfields=[('a', remove_html_markup(form['language']))])
 
