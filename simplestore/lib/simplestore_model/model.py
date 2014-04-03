@@ -137,7 +137,8 @@ class SubmissionMetadata(db.Model):
             'will not be public, however the metadata will be.'
         }
         self.field_args['contributors'] = {
-            'placeholder': 'contributor 1; contributor 2; ...',
+            'placeholder': 'contributor',
+            'add_more': True,
             'description':
             'A semicolon separated list of all other ' +\
             'contributors. Mention all ' +\
@@ -162,7 +163,7 @@ class SubmissionMetadata(db.Model):
         }
         self.field_args['creator'] = {
             'placeholder': 'author',
-            # 'add_more': True,
+            'add_more': True,
             'description': 
             'A semicolon separated list of authors of the resource.'
         }
