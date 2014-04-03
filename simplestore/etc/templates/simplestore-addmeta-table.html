@@ -109,15 +109,15 @@
     var rowNum = 0;
     function addRow(frm, placeholder, name) {
         if (placeholder){
-          placeholder = 'placeholder="'+placeholder+' '+(rowNum+2)+'"';
+          placeholder = 'placeholder="'+placeholder+'"';
         }
         rowNum ++;
-        var row = '<p id="'+name+'_rowNum'+rowNum+'"><input id="'+name+rowNum+'" type="text" name="'+name+'" '+placeholder+'>';
-        row += '<input type="button" value="Remove" onclick="removeRow('+name+','+rowNum+');"></p>';
+        var row = '<p id="rowNum'+rowNum+'"><input id="inputRowNum'+rowNum+'" type="text" name="'+name+'" '+placeholder+'>';
+        row += '<input type="button" value="Remove" onclick="removeRow('+rowNum+');"></p>';
         $('#'+name+"_div").append(row);
     }
     
-    function removeRow(name, rnum) {
-        $('#'+name+'_rowNum'+rnum).remove();
+    function removeRow(rnum) {
+        $('#rowNum'+rnum).remove();
     }
 </script>
