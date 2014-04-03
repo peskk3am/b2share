@@ -209,7 +209,7 @@ class AddFieldInput(Input):
         kwargs.setdefault('id', field.id)
         html = ['<div id="itemRows">']
         html.append('<p id="rowNum0"><input type="text" placeholder="{0}" {1}>'.format(
-             field.placeholder, self.html_params(name=field.name+"[]", **kwargs)))                             
+             field.placeholder, self.html_params(name=field.name, **kwargs)))                             
         html.append('<input onclick="addRow(this.form, \'{0}\', \'{1}\');" type="button" value="Add row" ></p>'
             .format(field.placeholder, field.name))              
         html.append('</div>')
