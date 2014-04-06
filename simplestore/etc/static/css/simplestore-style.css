@@ -300,13 +300,17 @@ a.description:hover span {
 }
 
 .plus {
-width: 150px;
-height: 150px;
-background: #999 url(/img/plus.png);
+  width: 30px;
+  height: 30px;
+  background: #fff url(/img/plus.png);
 }
 
 .minus {
-width: 150px;
-height: 150px;
-background: #999 url(/img/minus.png);
+  width: 30px;
+  height: 30px;
+  background: #fff url(/img/minus.png);
+}
+
+.add_field {
+  width: 254 px;
 }
