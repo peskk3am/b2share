@@ -849,13 +849,13 @@ font-weight: bold;
 /** 1..n cardinality input **/
 
 .plus {
-width: 50px;
-height: 50px;
+width: 150px;
+height: 150px;
 background: #999 url('/img/plus.png');
 }
 
 .minus {
-width: 50px;
-height: 50px;
+width: 150px;
+height: 150px;
 background: #999 url('/img/minus.png');
 }
