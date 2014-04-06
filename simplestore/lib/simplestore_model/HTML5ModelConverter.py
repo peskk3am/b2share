@@ -208,20 +208,24 @@ class AddFieldInput(Input):
     def __call__(self, field, **kwargs):
         kwargs.setdefault('id', field.id)
         html = ['<div id="'+field.name+'_div">']
-        html.append('<p id="rowNum0"><input type="text" placeholder="{0}" {1}>'.format(
-             field.placeholder, self.html_params(name=field.name, **kwargs)))                             
-        html.append('<input onclick="addRow(this.form, \'{0}\', \'{1}\');" type="button" value="Add" ></p>'
-            .format(field.placeholder, field.name))              
+        html.append('<p id="rowNum0"><input type="text" placeholder="{0}" {1}>'
+            .format(field.placeholder, self.html_params(name=field.name, **kwargs)))                             
+        html.append('<div class="plus" id="'field.name'_add" data-placeholder="{0}" data-cardinality="{1}"" name="{2}") >')
+            .format(field.placeholder, field.cardinality, field.name))
+        html.append('</p>')
+                          
         html.append('</div>')
         return HTMLString(''.join(html))
 
 class AddField(StringField):
     widget = AddFieldInput()
     placeholder = ""
+    cardinality = 1
 
-    def __init__(self, add_more="", placeholder="", **field_args):
+    def __init__(self, cardinality=1, placeholder="", **field_args):
         self.field_args = field_args
         self.placeholder = placeholder
+        self.cardinality = cardinality
         super(AddField, self).__init__(**field_args)
 
 
@@ -292,7 +296,7 @@ class HTML5ModelConverter(ModelConverter):
         if hidden:
             return hidden
 
-        if 'add_more' in field_args:
+        if 'cardinality' in field_args:
             return AddField(**field_args)
 
         if 'placeholder' in field_args:

@@ -138,7 +138,7 @@ class SubmissionMetadata(db.Model):
         }
         self.field_args['contributors'] = {
             'placeholder': 'contributor',
-            'add_more': True,
+            'cardinality': 'n',
             'description':
             'A semicolon separated list of all other ' +\
             'contributors. Mention all ' +\
@@ -163,7 +163,7 @@ class SubmissionMetadata(db.Model):
         }
         self.field_args['creator'] = {
             'placeholder': 'author',
-            'add_more': True,
+            'cardinality': 'n',
             'description': 
             'A semicolon separated list of authors of the resource.'
         }
@@ -250,7 +250,7 @@ def _create_metadata_class(cfg):
             args['field_args'][f['name']]['choices'] = f.get('choices')
         if 'other' in f:
             args['field_args'][f['name']]['other'] = f.get('other')
-        if 'add_more' in f:
-            args['field_args'][f['name']]['add_more'] = f.get('add_more')
+        if 'cardinality' in f:
+            args['field_args'][f['name']]['cardinality'] = f.get('cardinality')
 
     return type(clsname, (SubmissionMetadata,), args)

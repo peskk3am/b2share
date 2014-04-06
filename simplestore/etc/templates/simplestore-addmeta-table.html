@@ -106,15 +106,46 @@
 </script>
 
 <script type="text/javascript">
-    var rowNum = 0;
-    function addRow(frm, placeholder, name) {
-        if (placeholder){
-          placeholder = 'placeholder="'+placeholder+'"';
+ var rowNum = 0;
+
+ $('div minus').click(function(){
+      var row = $(this).attr('data-row');
+      $('#rowNum'+row).remove();
+ });
+
+ $('div plus').click(function(){
+      rowNum ++;
+      var name = $(this).attr('name');
+      var placeholder = $(this).attr('data-row'); 
+      var row = '<p id="rowNum'+rowNum+'"><input id="inputRowNum'+rowNum+'" type="text" name="'+name+'" placeholder="'+placeholder+'">';
+      row += '<div class="minus" data-row="'+rowNum+'"></p>';
+      $('#'+name+"_div").append(row);
+        
+        var rowCount = $('#'+name+"_div").has('input').length;
+        if (cardinality >= rowCount){
+          $("#"+name+"_add").hide();
         }
-        rowNum ++;
+        else {
+          $("#"+name+"_add").show();        
+        }
+
+      
+      
+ });
+
+    var rowNum = 0;
+    function addRow(frm, placeholder, name, cardinality) {
         var row = '<p id="rowNum'+rowNum+'"><input id="inputRowNum'+rowNum+'" type="text" name="'+name+'" '+placeholder+'>';
-        row += '<input type="button" value="Remove" onclick="removeRow('+rowNum+');"></p>';
+        row += '<div class="minus" data-row="'+rowNum+'"></p>';
         $('#'+name+"_div").append(row);
+        
+        var rowCount = $('#'+name+"_div").has('input').length;
+        if (cardinality >= rowCount){
+          $("#"+name+"_add").hide();
+        }
+        else {
+          $("#"+name+"_add").show();        
+        }
     }
     
     function removeRow(rnum) {
