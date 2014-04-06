@@ -849,12 +849,11 @@ font-weight: bold;
 .plus {
 width: 50px;
 height: 50px;
-background-image:url('/img/plus.png');
+background: url('/img/plus.png');
 }
 
 .minus {
 width: 50px;
 height: 50px;
-background-image:url('/img/plus.png');
-
+background: url('/img/plus.png');
 }

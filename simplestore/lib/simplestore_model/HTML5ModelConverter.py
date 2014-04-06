@@ -210,7 +210,7 @@ class AddFieldInput(Input):
         html = ['<div id="'+field.name+'_div">']
         html.append('<p id="rowNum0"><input type="text" placeholder="{0}" {1}>'
             .format(field.placeholder, self.html_params(name=field.name, **kwargs)))                             
-        html.append('<div class="plus" id="'field.name'_add" data-placeholder="{0}" data-cardinality="{1}"" name="{2}") >')
+        html.append('<div class="plus" data-placeholder="{0}" data-cardinality="{1}" name="{2}" >')
             .format(field.placeholder, field.cardinality, field.name))
         html.append('</p>')
                           
