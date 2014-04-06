@@ -108,12 +108,12 @@
 <script type="text/javascript">
  var rowNum = 0;
 
- $('div minus').click(function(){
+ $('div .minus').click(function(){
       var row = $(this).attr('data-row');
       $('#rowNum'+row).remove();
  });
 
- $('div plus').click(function(){
+ $('div .plus').click(function(){
       rowNum ++;
       var name = $(this).attr('name');
       var placeholder = $(this).attr('data-row');
