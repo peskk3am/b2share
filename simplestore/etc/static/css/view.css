@@ -845,17 +845,3 @@ border-bottom: 1px solid #999;
 background: #dedede;
 font-weight: bold;
 }
-
-/** 1..n cardinality input **/
-
-.plus {
-width: 150px;
-height: 150px;
-background: #999 url(/img/plus.png);
-}
-
-.minus {
-width: 150px;
-height: 150px;
-background: #999 url(/img/minus.png);
-}

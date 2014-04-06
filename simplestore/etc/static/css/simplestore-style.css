@@ -298,3 +298,15 @@ a.description:hover span {
     border:10px solid #666;
     background-color:#666; color:#fff
 }
+
+.plus {
+width: 150px;
+height: 150px;
+background: #999 url(/img/plus.png);
+}
+
+.minus {
+width: 150px;
+height: 150px;
+background: #999 url(/img/minus.png);
+}
