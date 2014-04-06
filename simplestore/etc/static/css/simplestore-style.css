@@ -300,14 +300,14 @@ a.description:hover span {
 }
 
 .plus {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   background: #fff url(/img/plus.png);
 }
 
 .minus {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   background: #fff url(/img/minus.png);
 }
 
