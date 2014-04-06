@@ -311,6 +311,6 @@ a.description:hover span {
   background: #fff url(/img/minus.png);
 }
 
-input.add_field {
-  width: 254 px;
+.add_field {
+  width: 254px;
 }
