@@ -108,13 +108,6 @@
 <script type="text/javascript">
  var rowNum = 0;
 
-$(document).ready(function() {
-   $('div .minus').click(function(){
-        var row = $(this).attr('data-row');
-        alert('#rowNum'+row);
-        $('#rowNum'+row).remove();
-   });
-});
  $('div .plus').click(function(){
       rowNum ++;
       var name = $(this).attr('name');
@@ -133,6 +126,13 @@ $(document).ready(function() {
         else {
           $("#"+name+"_add").show();        
         }
-*/                  
+*/
+   $('div .minus').click(function(){
+        var row = $(this).attr('data-row');
+        alert('#rowNum'+row);
+        $('#rowNum'+row).remove();
+   });
+                     
  });
+ 
 </script>
