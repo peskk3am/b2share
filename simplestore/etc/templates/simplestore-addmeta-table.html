@@ -122,7 +122,7 @@
         
       var rowCount = $('#'+name+"_div > div").length;
       if (cardinality <= rowCount){
-        $("#"+name+"_add").hide();
+        $("#"+name+"_add").css("visibility", "hidden");
       }
  });
  
@@ -132,7 +132,7 @@
    
    var rowCount = $('#'+name+"_div > div").length;
    if (cardinality > rowCount){
-     $("#"+name+"_add").show();
+     $("#"+name+"_add").css("visibility", "visible");
    } 
  });
  
