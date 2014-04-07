@@ -138,7 +138,7 @@ class SubmissionMetadata(db.Model):
         }
         self.field_args['contributors'] = {
             'placeholder': 'contributor',
-            'cardinality': '5',
+            'cardinality': 'n',
             'description':
             'A semicolon separated list of all other ' +\
             'contributors. Mention all ' +\
@@ -163,7 +163,7 @@ class SubmissionMetadata(db.Model):
         }
         self.field_args['creator'] = {
             'placeholder': 'author',
-            'cardinality': 'n',
+            'cardinality': '3',
             'description': 
             'A semicolon separated list of authors of the resource.'
         }
