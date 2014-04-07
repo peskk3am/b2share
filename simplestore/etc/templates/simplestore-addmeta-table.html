@@ -116,7 +116,7 @@
         
       var row = '<div id="rowNum'+rowNum+'">'
       row += '<input class="add_field" id="inputRowNum'+rowNum+'" type="text" name="'+name+'" placeholder="'+placeholder+'">';
-      row += '<div class="minus" data-row="'+rowNum+'"></div>';
+      row += '<div class="minus" data-name="'+name+'" data-row="'+rowNum+'"></div>';
       row += '</div>';
       $('#'+name+"_div").append(row);
         
