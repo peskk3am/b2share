@@ -302,15 +302,18 @@ a.description:hover span {
 .plus {
   width: 25px;
   height: 25px;
+  overflow: hidden;
   background: #fff url(/img/plus.png);
 }
 
 .minus {
   width: 25px;
   height: 25px;
+  overflow: hidden;
   background: #fff url(/img/minus.png);
 }
 
 .add_field {
   width: 230px;
+  float:left;
 }
