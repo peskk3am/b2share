@@ -120,7 +120,7 @@
       row += '</div>';
       $('#'+name+"_div").append(row);
         
-      var rowCount = $('#'+name+"_div > input").length;
+      var rowCount = $('#'+name+"_div > div").length;
       alert (rowCount);
       if (cardinality >= rowCount){
         $("#"+name+"_add").hide();
