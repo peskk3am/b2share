@@ -303,7 +303,7 @@ a.description:hover span {
   width:25px;
   height:25px;
   overflow:hidden;
-  margin-top:5px;
+  margin:5px;
 }
 
 .plus {
@@ -316,5 +316,5 @@ a.description:hover span {
 
 .add_field {
   float:left;
-  width:245px;
+  width:240px;
 }
