@@ -130,6 +130,7 @@
    var row = $(this).attr('data-row');
    $('#rowNum'+row).remove();
    
+   var rowCount = $('#'+name+"_div > div").length;
    if (cardinality > rowCount){
      $("#"+name+"_add").show();
    } 
