@@ -108,12 +108,13 @@
 <script type="text/javascript">
  var rowNum = 0;
 
- $('div .minus').click(function(){
-      var row = $(this).attr('data-row');
-      alert('#rowNum'+row);
-      $('#rowNum'+row).remove();
- });
-
+$(document).ready(function() {
+   $('div .minus').click(function(){
+        var row = $(this).attr('data-row');
+        alert('#rowNum'+row);
+        $('#rowNum'+row).remove();
+   });
+});
  $('div .plus').click(function(){
       rowNum ++;
       var name = $(this).attr('name');
@@ -121,7 +122,8 @@
       var cardinality = $(this).attr('data-cardinality');
         
       var row = '<div id="rowNum'+rowNum+'"><input class="add_field" id="inputRowNum'+rowNum+'" type="text" name="'+name+'" placeholder="'+placeholder+'">';
-      row += '<div class="minus" data-row="'+rowNum+'"></div></div>';
+      row += '<div class="minus" data-row="'+rowNum+'"></div>';
+      row += '</div>';
       $('#'+name+"_div").append(row);
 /*        
         var rowCount = $('#'+name+"_div").has('input').length;
