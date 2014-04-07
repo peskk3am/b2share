@@ -130,7 +130,7 @@
      var row = $(this).attr('data-row');
      $('#rowNum'+row).remove();
 
-     var name = $(this).attr('name');     
+     var name = $(this).attr('data-name');     
      var rowCount = $('#'+name+"_div > div").length;
      alert(rowCount);
      if (cardinality > rowCount){
