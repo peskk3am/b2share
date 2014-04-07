@@ -111,11 +111,11 @@
  $('div .plus').click(function(){
       rowNum ++;
       var name = $(this).attr('name');
-      var placeholder = $(this).attr('data-row');
+      var placeholder = $(this).attr('data-placeholder');
       var cardinality = $(this).attr('data-cardinality');
         
       var row = '<div id="rowNum'+rowNum+'"><input class="add_field" id="inputRowNum'+rowNum+'" type="text" name="'+name+'" placeholder="'+placeholder+'">';
-      row += '<div id="delRowNum'+rowNum+'" class="minus"></div>';
+      row += '<div class="minus" data-row="'+rowNum+'"></div>';
       row += '</div>';
       $('#'+name+"_div").append(row);
 /*        
@@ -127,10 +127,9 @@
           $("#"+name+"_add").show();        
         }
 */
-   $('#delRowNum'+rowNum).click(function(){
-        // var row = $(this).attr('data-row');
-        alert('#rowNum'+rowNum);
-        $('#rowNum'+rowNum).remove();
+   $('div .minus').click(function(){
+        var row = $(this).attr('data-row');
+        $('#rowNum'+row).remove();
    });
                      
  });
