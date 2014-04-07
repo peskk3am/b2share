@@ -127,11 +127,12 @@
           $("#"+name+"_add").show();        
         }
 */
-   $('div .minus').click(function(){
-        var row = $(this).attr('data-row');
-        $('#rowNum'+row).remove();
-   });
                      
+ });
+ 
+ $('form').on('click', '.minus', function() {
+   var row = $(this).attr('data-row');
+   $('#rowNum'+row).remove();
  });
  
 </script>
