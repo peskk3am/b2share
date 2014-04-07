@@ -300,23 +300,21 @@ a.description:hover span {
 }
 
 .plus, .minus {
-  width:30px;
-  height:30px;
+  width:25px;
+  height:25px;
   overflow:hidden;
-  background-repeat:no-repeat;
-  background-attachment:fixed;
-  background-position:center;
+  margin-top:5px;
 }
 
 .plus {
-  background-image: url(/img/plus.png);
+  background: url(/img/plus.png);
 }
 
 .minus {
-  background-image: url(/img/minus.png);
+  background: url(/img/minus.png);
 }
 
 .add_field {
   float:left;
-  width:240px;
+  width:245px;
 }
