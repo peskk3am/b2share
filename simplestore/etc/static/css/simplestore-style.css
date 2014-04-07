@@ -303,7 +303,7 @@ a.description:hover span {
   width:25px;
   height:25px;
   overflow:hidden;
-  margin:5px;
+  padding:5px;
 }
 
 .plus {
