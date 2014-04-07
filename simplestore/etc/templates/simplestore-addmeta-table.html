@@ -121,18 +121,18 @@
       $('#'+name+"_div").append(row);
         
       var rowCount = $('#'+name+"_div > div").length;
-      alert (rowCount);
       if (cardinality <= rowCount){
         $("#"+name+"_add").hide();
       }
-      else {
-        $("#"+name+"_add").show();        
-      }                     
  });
  
  $('form').on('click', '.minus', function() {
    var row = $(this).attr('data-row');
    $('#rowNum'+row).remove();
+   
+   if (cardinality > rowCount){
+     $("#"+name+"_add").show();
+   } 
  });
  
 </script>
