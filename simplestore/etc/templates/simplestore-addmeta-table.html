@@ -114,20 +114,19 @@
       var placeholder = $(this).attr('data-placeholder');
       var cardinality = $(this).attr('data-cardinality');
         
-      var row = '<div id="rowNum'+rowNum+'"><input class="add_field" id="inputRowNum'+rowNum+'" type="text" name="'+name+'" placeholder="'+placeholder+'">';
+      var row = '<div id="rowNum'+rowNum+'">'
+      row += '<input class="add_field" id="inputRowNum'+rowNum+'" type="text" name="'+name+'" placeholder="'+placeholder+'">';
       row += '<div class="minus" data-row="'+rowNum+'"></div>';
       row += '</div>';
       $('#'+name+"_div").append(row);
-/*        
-        var rowCount = $('#'+name+"_div").has('input').length;
-        if (cardinality >= rowCount){
-          $("#"+name+"_add").hide();
-        }
-        else {
-          $("#"+name+"_add").show();        
-        }
-*/
-                     
+        
+      var rowCount = $('#'+name+"_div").has('input').length;
+      if (cardinality >= rowCount){
+        $("#"+name+"_add").hide();
+      }
+      else {
+        $("#"+name+"_add").show();        
+      }                     
  });
  
  $('form').on('click', '.minus', function() {

@@ -208,19 +208,21 @@ class AddFieldInput(Input):
     def __call__(self, field, **kwargs):
         kwargs.setdefault('id', field.id)
         html = ['<div id="'+field.name+'_div">']
-        html.append('<div id="rowNum0"><input class="add_field" type="text" id="inputRowNum0" placeholder="{0}" {1}>'.format(field.placeholder, self.html_params(name=field.name, **kwargs)))                             
-        html.append('<div class="plus" data-placeholder="{0}" data-cardinality="{1}" name="{2}"></div>'.format(field.placeholder, field.cardinality, field.name))
-        html.append('</div>')
-                          
+        html.append('<div id="rowNum0">')
+        html.append('<input class="add_field" type="text" id="inputRowNum0" placeholder="{0}" {1}>'
+            .format(field.placeholder, self.html_params(name=field.name, **kwargs)))                             
+        html.append('<div class="plus" id="add_{2}" data-placeholder="{0}" data-cardinality="{1}" name="{2}"></div>'
+            .format(field.placeholder, field.cardinality, field.name))
+        html.append('</div>')                          
         html.append('</div>')
         return HTMLString(''.join(html))
 
 class AddField(StringField):
     widget = AddFieldInput()
     placeholder = ""
-    cardinality = 1
+    cardinality = "n"
 
-    def __init__(self, cardinality=1, placeholder="", **field_args):
+    def __init__(self, cardinality="n", placeholder="", **field_args):
         self.field_args = field_args
         self.placeholder = placeholder
         self.cardinality = cardinality
