@@ -138,7 +138,7 @@ class SubmissionMetadata(db.Model):
         }
         self.field_args['contributors'] = {
             'placeholder': 'contributor',
-            'cardinality': '3',
+            'cardinality': '5',
             'description':
             'A semicolon separated list of all other ' +\
             'contributors. Mention all ' +\
