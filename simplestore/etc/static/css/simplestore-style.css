@@ -300,9 +300,12 @@ a.description:hover span {
 }
 
 .plus, .minus {
-  width: 30px;
-  height: 30px;
-  overflow: hidden;
+  width:30px;
+  height:30px;
+  overflow:hidden;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  background-position:center;
 }
 
 .plus {
@@ -315,5 +318,5 @@ a.description:hover span {
 
 .add_field {
   float:left;
-  width: 240px;
+  width:240px;
 }
