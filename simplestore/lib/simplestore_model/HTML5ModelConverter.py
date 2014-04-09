@@ -26,6 +26,7 @@ from wtforms import HiddenField as _HiddenField
 from wtforms.widgets import Input, Select, HTMLString, html_params
 from wtforms.compat import text_type
 from flask import current_app
+from json import dump
 
 
 class SwitchInput(Input):
@@ -149,7 +150,8 @@ class TypeAheadStringField(StringField):
 
     def __init__(self, data_provide="", data_source="", **kwargs):
         self.data_provide = data_provide
-        self.data_source = data_source
+        # create json
+        self.data_source = json.dump(data_source)
         super(TypeAheadStringField, self).__init__(**kwargs)
 
 
@@ -186,7 +188,7 @@ class SelectWithInput(Select):
         html.append('</select>')
         html.append('<input type=text style="display: none" {0} {1} >'
             .format(html_params(name=field.name+"_input"),
-                    html_params(id=field.name+"_input")))                          
+                    html_params(id=field.name+"_input")))
         return HTMLString(''.join(html))
 
 
@@ -211,7 +213,7 @@ class AddFieldInput(Input):
         html.append('<div id="rowNum0">')
         html.append('<input class="add_field" type="text" id="inputRowNum0" placeholder="{0}" {1}>'
             .format(field.placeholder, self.html_params(name=field.name, **kwargs)))                             
-        html.append('<div class="plus" id="{2}_add" data-placeholder="{0}" data-cardinality="{1}" name="{2}"></div>'
+        html.append('<a href="" class="plus" id="{2}_add" data-placeholder="{0}" data-cardinality="{1}" name="{2}"></a>'
             .format(field.placeholder, field.cardinality, field.name))
         html.append('</div>')                          
         html.append('</div>')
@@ -296,22 +298,22 @@ class HTML5ModelConverter(ModelConverter):
         if hidden:
             return hidden
 
+        if 'data_provide' in field_args:
+           if 'data_provide' == 'typeahead':           
+               return TypeAheadStringField(**field_args)
+           if 'data_provide' == 'choices': 
+              # SelectField
+              if 'other' in field_args:
+                  return SelectFieldWithInput(**field_args)
+  
+              if isinstance(field_args['choices'][0], basestring):
+                  field_args['choices'] = [(x,x) for x in field_args['choices']]
+              return SelectField(**field_args)
+
         if 'cardinality' in field_args:
             return AddField(**field_args)
 
         if 'placeholder' in field_args:
             return PlaceholderStringField(**field_args)
-
-        if 'data_provide' in field_args:
-            return TypeAheadStringField(**field_args)
-
-        # SelectField
-        if 'choices' in field_args:
-            if 'other' in field_args:
-                return SelectFieldWithInput(**field_args)
-
-            if isinstance(field_args['choices'][0], basestring):
-                field_args['choices'] = [(x,x) for x in field_args['choices']]
-            return SelectField(**field_args)
 
         return StringField(**field_args)

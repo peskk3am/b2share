@@ -46,8 +46,8 @@ fields = [
                        'Case-control, Cohort, Cross-sectional, Longitudinal, '
                        'Twin-study, Quality control, Population-based, Other',
         'data_provide': 'typeahead',
-        'data_source': json.dumps(['Case-control', 'Cohort', 'Cross-sectional', 'Longitudinal',
-                                   'Twin-study', 'Quality control', 'Population-based']),
+        'data_source': ['Case-control', 'Cohort', 'Cross-sectional', 'Longitudinal',
+                                   'Twin-study', 'Quality control', 'Population-based'],
         'required': False
     },
     {
@@ -66,8 +66,8 @@ fields = [
                        'Biological samples, Register data, Survey data, '
                        'Physiological measurements, Imaging data, Medical records, Other',
         'data_provide': 'typeahead',
-        'data_source': json.dumps(['Biological samples', 'Register data', 'Survey data',
-                                   'Physiological measurements', 'Imaging data', 'Medical records']),
+        'data_source': ['Biological samples', 'Register data', 'Survey data',
+                                   'Physiological measurements', 'Imaging data', 'Medical records'],
         'required': False
     },
     {
@@ -108,8 +108,8 @@ fields = [
                        'Can be one or several of the following values: '
                        'Whole blood, Plasma, Serum, Urine, Saliva, CSF, DNA, RNA, Tissue, Faeces, Other',
         'data_provide': 'typeahead',
-        'data_source': json.dumps(['Whole blood', 'Plasma', 'Serum', 'Urine', 'Saliva',
-                                   'CSF', 'DNA', 'RNA', 'Tissue', 'Faeces']),
+        'data_source': ['Whole blood', 'Plasma', 'Serum', 'Urine', 'Saliva',
+                                   'CSF', 'DNA', 'RNA', 'Tissue', 'Faeces'],
         'required': False
     },
 ]
