@@ -151,7 +151,7 @@ class TypeAheadStringField(StringField):
     def __init__(self, data_provide="", data_source="", **kwargs):
         self.data_provide = data_provide
         # create json
-        self.data_source = json.dump(data_source)
+        self.data_source = dump(data_source)
         super(TypeAheadStringField, self).__init__(**kwargs)
 
 

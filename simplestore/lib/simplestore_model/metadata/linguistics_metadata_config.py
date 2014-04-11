@@ -1,6 +1,5 @@
 from invenio.sqlalchemyutils import db
 from invenio.simplestore_model.metadata.linguistics_lang_codes import lang_codes
-import json
 
 domain = "Linguistics"
 table_name = 'CLARIN'
