@@ -19,7 +19,7 @@
 """
 __revision__ = "$Id$"
 
-from simplestore_model import metadata_classes
+from invenio.simplestore_model import metadata_classes
 
 
 def format_element(bfo):
