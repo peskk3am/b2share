@@ -146,17 +146,17 @@ class SubmissionMetadata(db.Model):
         }
         self.field_args['language'] = {
             'hidden': True,
-            'value': self.language_default
+            'value': self.language_default,
             # 'description':
             # 'The name of the language the document is written in.'
         }
-        self.field_args['resource_type'] = {
-            'data_provide': 'choices',
-            'data_source': ['Text', 'Image', 'Video'], # choices -> SelectField
-            'other': 'Other...', # other -> dynamic input text field
-            'description':
-            'Select the type of the resource.'
-        }
+#        self.field_args['resource_type'] = {
+#            'data_provide': 'choices',
+#            'data_source': ['Text', 'Image', 'Video'], # choices -> SelectField
+#            'other': 'Other...', # other -> dynamic input text field
+#            'description':
+#            'Select the type of the resource.'
+#        }
         self.field_args['alternate_identifier'] = {
             'placeholder': 'Other reference, such as URI, ISBN, etc.',
             'description':
