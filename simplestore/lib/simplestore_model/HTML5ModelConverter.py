@@ -308,6 +308,7 @@ class HTML5ModelConverter(ModelConverter):
   
               if isinstance(data_source[0], basestring):
                   field_args['choices'] = [(x,x) for x in data_source]
+                  del field_args['data_source']
               return SelectField(**field_args)
 
         if 'cardinality' in field_args:
