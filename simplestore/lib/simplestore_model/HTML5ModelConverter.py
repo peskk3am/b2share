@@ -180,7 +180,7 @@ class PlaceholderStringField(StringField):
 
 
 class SelectWithInput(Select):
-    def __call__(self, field, other="", data_source="", **kwargs):
+    def __call__(self, field, **kwargs):
         kwargs.setdefault('id', field.id)
         html = ['<select %s>' % html_params(name=field.name, **kwargs)]
         for val, label, selected in field.iter_choices():

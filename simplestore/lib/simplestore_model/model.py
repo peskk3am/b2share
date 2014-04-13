@@ -153,7 +153,7 @@ class SubmissionMetadata(db.Model):
         self.field_args['resource_type'] = {
             'data_provide': 'choices',
             'data_source': ['Text', 'Image', 'Video'], # choices -> SelectField
-            'other': 'Other...', # other -> dynamic input text field
+            #'other': 'Other...', # other -> dynamic input text field
             'description':
             'Select the type of the resource.'
         }
