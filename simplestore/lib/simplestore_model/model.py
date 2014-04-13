@@ -117,8 +117,8 @@ class SubmissionMetadata(db.Model):
             'Denote the version of the resource.'
         }
         self.field_args['licence'] = {
-            'data_provide': 'typeahead',
-            'data_source': ["GPL","Apache v2","Commercial", "Other"],
+#            'data_provide': 'typeahead',
+#            'data_source': ["GPL","Apache v2","Commercial", "Other"],
             'description': 'Specify whether users need to sign a licence ' +\
                            'agreement to access the data (e.g. GPL, ' +\
                            'Apache v2 or Commercial); if no licence applies ' +\
