@@ -12,6 +12,8 @@ fields = [{'name':'language_code',
            'description': 'This element can be used to add an ISO language code from ' +\
                           'ISO-639-3 to uniquely identify the language a document ' +\
                           'is written in'},
+           'data_provide': 'typeahead',
+           'data_source': lang_codes,
           {'name':'region',
            'display_text':'Country/Region',
            'col_type':db.String(256),
