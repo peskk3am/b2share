@@ -151,7 +151,7 @@ class TypeAheadStringField(StringField):
     def __init__(self, data_provide="", data_source="", **kwargs):
         self.data_provide = data_provide
         # create json
-        self.data_source = "" #dumps(data_source)
+        self.data_source = dumps(data_source)
         super(TypeAheadStringField, self).__init__(**kwargs)
 
 
@@ -194,14 +194,13 @@ class SelectWithInput(Select):
 
 class SelectFieldWithInput(SelectField):
     widget = SelectWithInput()
-    data_source = []
 
     def __init__(self, other="", data_provide="", data_source="", **field_args):
         # make list of tuples for SelectField (only once)
         if isinstance(data_source[0], basestring):
-            field_args['choices'] = [(x,x) for x in data_source]
-            field_args['choices'].append(('other', other))
-        super(SelectFieldWithInput, self).__init__(field_args)
+            self.field_args['choices'] = [(x,x) for x in data_source]
+            self.field_args['choices'].append(('other', other))
+        super(SelectFieldWithInput, self).__init__(**field_args)
 
 
 class AddFieldInput(Input):
