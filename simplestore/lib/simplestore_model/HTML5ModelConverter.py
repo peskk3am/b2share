@@ -199,8 +199,8 @@ class SelectFieldWithInput(SelectField):
         self.field_args = field_args
         # make list of tuples for SelectField (only once)
         if isinstance(self.field_args['data_source'][0], basestring):
-            self.field_args['data_source'] = [(x,x) for x in field_args['data_source']]
-            self.field_args['data_source'].append(('other', other))
+            self.field_args['choices'] = [(x,x) for x in field_args['data_source']]
+            self.field_args['choices'].append(('other', other))
         super(SelectFieldWithInput, self).__init__(**field_args)
 
 
@@ -307,7 +307,7 @@ class HTML5ModelConverter(ModelConverter):
                   return SelectFieldWithInput(**field_args)
   
               if isinstance(field_args['data_source'][0], basestring):
-                  field_args['data_source'] = [(x,x) for x in field_args['data_source']]
+                  field_args['choices'] = [(x,x) for x in field_args['data_source']]
               return SelectField(**field_args)
 
         if 'cardinality' in field_args:
