@@ -300,16 +300,16 @@ class HTML5ModelConverter(ModelConverter):
         if 'data_provide' in field_args:
            if 'data_provide' == 'typeahead':           
                return TypeAheadStringField(**field_args)
-           if 'data_provide' == 'choices':               
+           #if 'data_provide' == 'choices':               
               # SelectField
               #if 'other' in field_args:
               #    return SelectFieldWithInput(**field_args)
   
               #if isinstance(field_args['data_source'][0], basestring):
-              field_args['choices'] = [(x,x) for x in field_args['data_source']]
-              del field_args['data_source']
-              raise Exception("zadny other")
-              return SelectField(**field_args)
+           #   field_args['choices'] = [(x,x) for x in field_args['data_source']]
+           #   del field_args['data_source']
+           #   raise Exception("zadny other")
+           #   return SelectField(**field_args)
 
         if 'cardinality' in field_args:
             return AddField(**field_args)
