@@ -180,7 +180,7 @@ class PlaceholderStringField(StringField):
 
 
 class SelectWithInput(Select):
-    def __call__(self, field, **kwargs):
+    def __call__(self, field, other="", data_source="", **kwargs):
         kwargs.setdefault('id', field.id)
         html = ['<select %s>' % html_params(name=field.name, **kwargs)]
         for val, label, selected in field.iter_choices():
@@ -194,6 +194,7 @@ class SelectWithInput(Select):
 
 class SelectFieldWithInput(SelectField):
     widget = SelectWithInput()
+    data_source = []
 
     def __init__(self, other="", data_source="", **field_args):
         self.field_args = field_args
@@ -222,7 +223,7 @@ class AddFieldInput(Input):
 class AddField(StringField):
     widget = AddFieldInput()
     placeholder = ""
-    cardinality = "n"
+    cardinality = ""
 
     def __init__(self, cardinality="n", placeholder="", **field_args):
         self.field_args = field_args
@@ -306,8 +307,8 @@ class HTML5ModelConverter(ModelConverter):
               if 'other' in field_args:
                   return SelectFieldWithInput(**field_args)
   
-              if isinstance(data_source[0], basestring):
-                  field_args['choices'] = [(x,x) for x in data_source]
+              if isinstance(field_args['data_source'][0], basestring):
+                  field_args['choices'] = [(x,x) for x in field_args['data_source']]
                   del field_args['data_source']
               return SelectField(**field_args)
 
