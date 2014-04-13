@@ -26,7 +26,7 @@ from wtforms import HiddenField as _HiddenField
 from wtforms.widgets import Input, Select, HTMLString, html_params
 from wtforms.compat import text_type
 from flask import current_app
-# from json import dumps
+from json import dumps
 
 
 class SwitchInput(Input):
@@ -151,7 +151,7 @@ class TypeAheadStringField(StringField):
     def __init__(self, data_provide="", data_source="", **kwargs):
         self.data_provide = data_provide
         # create json
-        # self.data_source = dumps(data_source)
+        self.data_source = dumps(data_source)
         super(TypeAheadStringField, self).__init__(**kwargs)
 
 
@@ -198,9 +198,9 @@ class SelectFieldWithInput(SelectField):
     def __init__(self, other="", **field_args):
         self.field_args = field_args
         # make list of tuples for SelectField (only once)
-        if isinstance(self.field_args['choices'][0], basestring):
-            self.field_args['choices'] = [(x,x) for x in field_args['choices']]
-            self.field_args['choices'].append(('other', other))
+        if isinstance(self.field_args['data_source'][0], basestring):
+            self.field_args['data_source'] = [(x,x) for x in field_args['data_source']]
+            self.field_args['data_source'].append(('other', other))
         super(SelectFieldWithInput, self).__init__(**field_args)
 
 
@@ -306,8 +306,8 @@ class HTML5ModelConverter(ModelConverter):
               if 'other' in field_args:
                   return SelectFieldWithInput(**field_args)
   
-              if isinstance(field_args['choices'][0], basestring):
-                  field_args['choices'] = [(x,x) for x in field_args['choices']]
+              if isinstance(field_args['data_source'][0], basestring):
+                  field_args['data_source'] = [(x,x) for x in field_args['data_source']]
               return SelectField(**field_args)
 
         if 'cardinality' in field_args:
