@@ -26,7 +26,7 @@ from wtforms import HiddenField as _HiddenField
 from wtforms.widgets import Input, Select, HTMLString, html_params
 from wtforms.compat import text_type
 from flask import current_app
-from json import dumps
+# from json import dumps
 
 
 class SwitchInput(Input):
@@ -151,7 +151,7 @@ class TypeAheadStringField(StringField):
     def __init__(self, data_provide="", data_source="", **kwargs):
         self.data_provide = data_provide
         # create json
-        self.data_source = dumps(data_source)
+        # self.data_source = dumps(data_source)
         super(TypeAheadStringField, self).__init__(**kwargs)
 
 
