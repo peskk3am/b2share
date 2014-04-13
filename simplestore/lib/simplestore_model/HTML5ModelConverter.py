@@ -197,12 +197,11 @@ class SelectFieldWithInput(SelectField):
     data_source = []
 
     def __init__(self, other="", data_source="", **field_args):
-        self.field_args = field_args
         # make list of tuples for SelectField (only once)
         if isinstance(data_source[0], basestring):
-            self.field_args['choices'] = [(x,x) for x in data_source]
-            self.field_args['choices'].append(('other', other))
-        super(SelectFieldWithInput, self).__init__(**field_args)
+            field_args['choices'] = [(x,x) for x in data_source]
+            field_args['choices'].append(('other', other))
+        super(SelectFieldWithInput, self).__init__(field_args)
 
 
 class AddFieldInput(Input):
@@ -226,7 +225,6 @@ class AddField(StringField):
     cardinality = ""
 
     def __init__(self, cardinality="n", placeholder="", **field_args):
-        self.field_args = field_args
         self.placeholder = placeholder
         self.cardinality = cardinality
         super(AddField, self).__init__(**field_args)
