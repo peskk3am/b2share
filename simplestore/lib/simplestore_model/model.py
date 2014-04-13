@@ -151,7 +151,7 @@ class SubmissionMetadata(db.Model):
             # 'The name of the language the document is written in.'
         }
         self.field_args['resource_type'] = {
-            'data_provide': 'choices'
+            'data_provide': 'choices',
             'data_source': ['Text', 'Image', 'Video'], # choices -> SelectField
             'other': 'Other...', # other -> dynamic input text field
             'description':
