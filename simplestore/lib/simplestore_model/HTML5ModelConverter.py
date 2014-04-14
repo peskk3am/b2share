@@ -196,8 +196,8 @@ class SelectFieldWithInput(SelectField):
     def __init__(self, other="", data_provide="", data_source="", **field_args):
         # make list of tuples for SelectField (only once)
         if isinstance(data_source[0], basestring):
-            self.field_args['choices'] = [(x,x) for x in data_source]
-            self.field_args['choices'].append(('other', other))
+            field_args['choices'] = [(x,x) for x in data_source]
+            field_args['choices'].append(('other', other))
         super(SelectFieldWithInput, self).__init__(**field_args)
 
 
