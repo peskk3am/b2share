@@ -297,8 +297,9 @@ class HTML5ModelConverter(ModelConverter):
             return hidden
 
         if 'data_provide' in field_args:
-           if 'data_provide' == 'typeahead':           
-               return TypeAheadStringField(**field_args)
+           if 'data_provide' == 'typeahead':  
+               return StringField(**field_args)     
+               #return TypeAheadStringField(**field_args)
            #if 'data_provide' == 'choices':               
               # SelectField
               #if 'other' in field_args:
