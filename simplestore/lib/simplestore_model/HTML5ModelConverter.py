@@ -212,8 +212,9 @@ class AddFieldInput(Input):
         html.append('<div id="rowNum0">')
         html.append('<input class="add_field" type="text" id="inputRowNum0" placeholder="{0}" {1}>'
             .format(field.placeholder, self.html_params(name=field.name, **kwargs)))                             
-        html.append('<a href="" class="plus" id="{2}_add" data-placeholder="{0}" data-cardinality="{1}" name="{2}"></a>'
+        html.append('<div class="plus" id="{2}_add" data-placeholder="{0}" data-cardinality="{1}" name="{2}"></div>'
             .format(field.placeholder, field.cardinality, field.name))
+        html.append('</div>')
         html.append('</div>')
         return HTMLString(''.join(html))
 
