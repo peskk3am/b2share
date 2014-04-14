@@ -14,7 +14,7 @@ fields = [{'name':'language_code',
                           'is written in',
 #           'data_provide': 'typeahead',
 #           'data_source': lang_codes},
-          }
+          },
           {'name':'region',
            'display_text':'Country/Region',
            'col_type':db.String(256),
