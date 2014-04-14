@@ -131,7 +131,7 @@ class SSDecimalField(DecimalField):
 class TypeAheadStringInput(Input):
     input_type = "text"
 
-    def __call__(self, field, data_provide="", data_source="", **kwargs):
+    def __call__(self, field, data_provide="", data="", **kwargs):
         kwargs.setdefault('id', field.id)
         kwargs.setdefault('type', self.input_type)
         if 'value' not in kwargs:
@@ -139,19 +139,19 @@ class TypeAheadStringInput(Input):
 
         return HTMLString(
             '<input autocomplete="off" data-provide="{0}" data-source=\'{1}\' {2}>'.format(
-            field.data_provide, field.data_source, self.html_params(name=field.name, **kwargs)))
+            field.data_provide, field.data, self.html_params(name=field.name, **kwargs)))
 
 
 class TypeAheadStringField(StringField):
 
     widget = TypeAheadStringInput()
     data_provide = ""
-    data_source = ""
+    data = ""
 
-    def __init__(self, data_provide="", data_source="", **kwargs):
+    def __init__(self, data_provide="", data="", **kwargs):
         self.data_provide = data_provide
         # create json
-        self.data_source = dumps(data_source)
+        self.data = dumps(data)
         super(TypeAheadStringField, self).__init__(**kwargs)
 
 
@@ -180,7 +180,7 @@ class PlaceholderStringField(StringField):
 
 
 class SelectWithInput(Select):
-    def __call__(self, field, data_provide="", data_source="", **kwargs):
+    def __call__(self, field, data_provide="", data="", **kwargs):
         kwargs.setdefault('id', field.id)
         html = ['<select %s>' % html_params(name=field.name, **kwargs)]
         for val, label, selected in field.iter_choices():
@@ -195,10 +195,10 @@ class SelectWithInput(Select):
 class SelectFieldWithInput(SelectField):
     widget = SelectWithInput()
 
-    def __init__(self, other="", data_provide="", data_source="", **field_args):
+    def __init__(self, other="", data_provide="", data="", **field_args):
         # make list of tuples for SelectField (only once)
-        if isinstance(data_source[0], basestring):
-            self.field_args['choices'] = [(x,x) for x in data_source]
+        if isinstance(data[0], basestring):
+            self.field_args['choices'] = [(x,x) for x in data]
             self.field_args['choices'].append(('other', other))
         super(SelectFieldWithInput, self).__init__(**field_args)
 
@@ -304,9 +304,9 @@ class HTML5ModelConverter(ModelConverter):
               #if 'other' in field_args:
               #    return SelectFieldWithInput(**field_args)
   
-              #if isinstance(field_args['data_source'][0], basestring):
-           #   field_args['choices'] = [(x,x) for x in field_args['data_source']]
-           #   del field_args['data_source']
+              #if isinstance(field_args['data'][0], basestring):
+           #   field_args['choices'] = [(x,x) for x in field_args['data']]
+           #   del field_args['data']
            #   raise Exception("zadny other")
            #   return SelectField(**field_args)
 

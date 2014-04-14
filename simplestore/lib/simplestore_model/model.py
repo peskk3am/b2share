@@ -118,7 +118,7 @@ class SubmissionMetadata(db.Model):
         }
         self.field_args['licence'] = {
             'data_provide': 'typeahead',
-            'data_source': ["GPL","Apache v2","Commercial", "Other"],
+            'data': ["GPL","Apache v2","Commercial", "Other"],
             'description': 'Specify whether users need to sign a licence ' +\
                            'agreement to access the data (e.g. GPL, ' +\
                            'Apache v2 or Commercial); if no licence applies ' +\
@@ -152,7 +152,7 @@ class SubmissionMetadata(db.Model):
         }
         self.field_args['resource_type'] = {
 #            'data_provide': 'choices',  # choices -> SelectField
-#            'data_source': ['Text', 'Image', 'Video'], 
+#            'data': ['Text', 'Image', 'Video'], 
 #            'other': 'Other...', # other -> dynamic input text field
             'description':
             'Select the type of the resource.'
@@ -239,8 +239,8 @@ def _create_metadata_class(cfg):
             args['field_args'][f['name']]['description'] = f.get('description')
         if 'data_provide' in f:
             args['field_args'][f['name']]['data_provide'] = f.get('data_provide')
-        if 'data_source' in f:
-            args['field_args'][f['name']]['data_source'] = f.get('data_source')
+        if 'data' in f:
+            args['field_args'][f['name']]['data'] = f.get('data')
         if 'default' in f:
             args['field_args'][f['name']]['default'] = f.get('default')
         if 'placeholder' in f:
