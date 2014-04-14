@@ -1,5 +1,4 @@
 from invenio.sqlalchemyutils import db
-import json
 
 domain = 'BBMRI'
 # display_name = 'Biobanking and BioMolecular Resources Research Infrastructure'
@@ -46,8 +45,8 @@ fields = [
                        'Case-control, Cohort, Cross-sectional, Longitudinal, '
                        'Twin-study, Quality control, Population-based, Other',
         'data_provide': 'typeahead',
-        'data': ['Case-control', 'Cohort', 'Cross-sectional', 'Longitudinal',
-                                   'Twin-study', 'Quality control', 'Population-based'],
+        'data_source': "['Case-control', 'Cohort', 'Cross-sectional', 'Longitudinal',
+                                   'Twin-study', 'Quality control', 'Population-based']",
         'required': False
     },
     {
@@ -66,8 +65,8 @@ fields = [
                        'Biological samples, Register data, Survey data, '
                        'Physiological measurements, Imaging data, Medical records, Other',
         'data_provide': 'typeahead',
-        'data': ['Biological samples', 'Register data', 'Survey data',
-                                   'Physiological measurements', 'Imaging data', 'Medical records'],
+        'data_source': "['Biological samples', 'Register data', 'Survey data',
+                                   'Physiological measurements', 'Imaging data', 'Medical records']",
         'required': False
     },
     {
@@ -90,7 +89,7 @@ fields = [
         'display_text': 'Sex',
         'description': 'The sex of the study participants. Can be several of the following values: Female, Male, Other',
         'data_provide': 'typeahead',
-        'data': json.dumps(['Female', 'Male']),
+        'data_source': "['Female', 'Male']",
         'required': False
     },
     {
@@ -108,8 +107,8 @@ fields = [
                        'Can be one or several of the following values: '
                        'Whole blood, Plasma, Serum, Urine, Saliva, CSF, DNA, RNA, Tissue, Faeces, Other',
         'data_provide': 'typeahead',
-        'data': ['Whole blood', 'Plasma', 'Serum', 'Urine', 'Saliva',
-                                   'CSF', 'DNA', 'RNA', 'Tissue', 'Faeces'],
+        'data_source': "['Whole blood', 'Plasma', 'Serum', 'Urine', 'Saliva',
+                                   'CSF', 'DNA', 'RNA', 'Tissue', 'Faeces']",
         'required': False
     },
 ]
