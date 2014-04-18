@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ## This file is part of SimpleStore.
 ## Copyright (C) 2013 EPCC, The University of Edinburgh.
 ##
