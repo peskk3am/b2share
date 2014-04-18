@@ -153,7 +153,7 @@ class SubmissionMetadata(db.Model):
         self.field_args['resource_type'] = {
             'data_provide': 'select',
             'cardinality': 'n',
-            'data_source': ['Text', 'Image', 'Video', 'Other'], 
+            'data_source': ['Textíáý¾rc¹', 'Image', 'Video', 'Other'], 
             'description':
             'Select the type of the resource.'
         }
