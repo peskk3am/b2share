@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from invenio.sqlalchemyutils import db
 from invenio.simplestore_model.metadata.linguistics_lang_codes import lang_codes
 
@@ -14,7 +16,7 @@ fields = [{'name':'language_code',
                           'is written in',
            'data_provide': 'select',
            'cardinality': 'n',
-           'data_source': ["1","2","3"]},
+           'data_source': ["¾ýá","áíé","+e¹e¹¹"]},
           {'name':'region',
            'display_text':'Country/Region',
            'col_type':db.String(256),

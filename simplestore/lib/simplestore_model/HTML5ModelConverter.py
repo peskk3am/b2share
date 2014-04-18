@@ -200,9 +200,9 @@ class SelectFieldWithInput(SelectField):
     widget = SelectWithInput()
     cardinality = 1
     filtering = ""
-    other = False
+    other = ""
 
-    def __init__(self, other=False, filtering="", cardinality=1, 
+    def __init__(self, other="", filtering="", cardinality=1, 
                        data_provide="", data_source="", **field_args):
         # make list of tuples for SelectField (only once)
         self.cardinality = cardinality        
