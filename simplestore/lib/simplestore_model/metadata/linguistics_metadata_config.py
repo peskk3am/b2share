@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from invenio.sqlalchemyutils import db
-from invenio.simplestore_model.metadata.linguistics_ISO_639_3 import lang_codes
+# from invenio.simplestore_model.metadata.linguistics_ISO_639_3 import lang_codes
 
 domain = "Linguistics"
 table_name = 'linguistics'
