@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
 from invenio.sqlalchemyutils import db
-# from invenio.simplestore_model.metadata.linguistics_ISO_639_3 import lang_codes
+from invenio.simplestore_model.metadata.linguistics_lang_codes import lang_codes
+import json
 
 domain = "Linguistics"
-table_name = 'linguistics'
-icon = 'icon-quote-right'
+table_name = 'CLARIN'
+image = 'domain-clarin.png'
 
 fields = [{'name':'language_code',
            'display_text':'Language Code',
@@ -13,9 +13,8 @@ fields = [{'name':'language_code',
            'description': 'This element can be used to add an ISO language code from ' +\
                           'ISO-639-3 to uniquely identify the language a document ' +\
                           'is written in',
-           'data_provide': 'select',
-           'cardinality': 'n',
-           'data_source': ["1", "2"]},
+           'data_provide': 'typeahead',
+           'data_source': json.dumps(lang_codes)},
           {'name':'region',
            'display_text':'Country/Region',
            'col_type':db.String(256),
@@ -26,11 +25,8 @@ fields = [{'name':'language_code',
            'display_text':'Resource Type',
            'col_type':db.String(256),
            'required':True,
-           'data_provide': 'select',
-           'data_source': ["Text", "Audio", "Video", "Time-Series", "Photo"],
-           'other': 'Other...',
            'description': 'This element allows the depositor to specify the type ' +\
-                          'of the resource.'},
+                          'of the resource (Text, Audio, Video, Time-Series, Photo, etc.)'},
           {'name':'project_name',
            'display_text':'Project Name',
            'col_type':db.String(256),
