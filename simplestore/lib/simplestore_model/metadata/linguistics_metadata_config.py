@@ -14,7 +14,6 @@ fields = [{'name':'language_code',
                           'ISO-639-3 to uniquely identify the language a document ' +\
                           'is written in',
            'data_provide': 'select',
-           'cardinality': 'n',
            'data_source': lang_codes},
           {'name':'region',
            'display_text':'Country/Region',
