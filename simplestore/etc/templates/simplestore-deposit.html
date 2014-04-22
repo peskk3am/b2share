@@ -159,7 +159,8 @@ $(document).ready(function() {
 </script>
 
 <script>
-    $('#metaform_form').submit(function() {
+    $('#metaform_form').submit(function(event) {
+        alert ("aaaa");
         var select_list = this.getElementsByTagName('select');
         alert("pocet: "+select_list.size());
         for(var i=0; i<select_list.length; i++) {
