@@ -144,6 +144,23 @@
 <script type="text/javascript">
   // Initialize the multiselect plugin:
   $(document).ready(function() {
-    $('.multiselect').multiselect();
+    $('.multiselect').multiselect({
+      maxHeight: 400,
+      enableCaseInsensitiveFiltering: true,
+    });
   });
+</script>
+
+<script>
+$('input[id$="_input"]').blur(function() {
+  alert( "Handler for .blur() called." );
+    
+  var select_name = ($(this).attr('id')).replace('_input','');
+  var select = $("#"+select_name);
+  if ( select.val() == "other" ){
+      // replace select value with text field value
+      select.val($(this).val());
+      alert( "hodnota: "+ $(this).val() );
+  }
+});
 </script>
